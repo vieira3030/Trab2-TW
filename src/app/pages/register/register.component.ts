@@ -8,7 +8,7 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrl: './register.component.css',
 })
 export class RegisterComponent {
   // Injeção moderna sem usar o construtor
@@ -18,10 +18,17 @@ export class RegisterComponent {
   onSubmit(form: NgForm) {
     this.authService.register(form.value).subscribe({
       next: (res) => {
-        alert("Sucesso: " + res.message);
+        alert('Sucesso: ' + res.message);
         form.reset();
       },
-      error: (err) => alert("Erro: " + err.error.message)
+      error: (err) => {
+        console.error(err); // Isto vai mostrar o erro real na consola (F12)
+        alert(
+          'Erro: ' +
+            (err.error?.message ||
+              'Não foi possível ligar ao servidor. O Rodrigo ligou o backend?'),
+        );
+      },
     });
   }
 }
