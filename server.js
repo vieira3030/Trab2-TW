@@ -26,6 +26,7 @@ app.get("/", (req, res) => {
 
 // --- ARRANCAR O SERVIDOR ---
 const PORT = process.env.PORT || 8080;
+require("./routes/auth.routes")(app); // Liga as rotas de autenticação
 app.listen(PORT, () => {
   console.log(`Servidor a correr na porta ${PORT}.`);
 });
