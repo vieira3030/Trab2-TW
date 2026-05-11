@@ -1,18 +1,10 @@
 <div class="auth-container">
   <h2>Entrar</h2>
-  <form #loginForm="ngForm">
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
     
     <div class="form-group">
       <label for="login-email">Email:</label>
-      <input 
-        id="login-email" 
-        type="email" 
-        name="email" 
-        ngModel 
-        required 
-        email 
-        #mail="ngModel" 
-        placeholder="O teu email">
+      <input id="login-email" type="email" name="email" ngModel required email #mail="ngModel" placeholder="O teu email">
       
       @if (mail.invalid && mail.touched) {
         <small class="error">Insira um email válido.</small>
@@ -21,20 +13,13 @@
 
     <div class="form-group">
       <label for="login-password">Password:</label>
-      <input 
-        id="login-password" 
-        type="password" 
-        name="password" 
-        ngModel 
-        required 
-        #pass="ngModel" 
-        placeholder="A tua password">
+      <input id="login-password" type="password" name="password" ngModel required #pass="ngModel" placeholder="A tua password">
       
       @if (pass.invalid && pass.touched) {
         <small class="error">A password é obrigatória.</small>
       }
     </div>
 
-    <button [disabled]="loginForm.invalid" class="btn-submit">Login</button>
+    <button [disabled]="loginForm.invalid" type="submit" class="btn-submit">Entrar</button>
   </form>
 </div>

@@ -1,6 +1,6 @@
 <div class="auth-container">
   <h2>Criar Conta</h2>
-  <form #registerForm="ngForm">
+  <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
     
     <div class="form-group">
       <label for="username">Nome de Utilizador:</label>
@@ -29,6 +29,6 @@
       }
     </div>
 
-    <button [disabled]="registerForm.invalid" class="btn-submit">Registar</button>
+    <button [disabled]="registerForm.invalid" type="submit" class="btn-submit">Registar</button>
   </form>
 </div>
