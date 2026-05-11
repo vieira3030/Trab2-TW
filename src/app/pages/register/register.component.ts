@@ -1,25 +1,34 @@
+import { Component, inject } from '@angular/core'; // Adicionado o inject
+import { CommonModule } from '@angular/common';
+import { FormsModule, NgForm } from '@angular/forms'; // Adicionado o NgForm
 import { AuthService } from '../../services/auth.service';
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Para o *ngIf funcionar
-import { FormsModule } from '@angular/forms';   // Para o ngModel funcionar
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule], // ESTA LINHA É A MAIS IMPORTANTE
+  imports: [CommonModule, FormsModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrl: './register.component.css',
 })
 export class RegisterComponent {
-  constructor(private authService: AuthService) {}
+  // Injeção moderna sem usar o construtor
+  private authService = inject(AuthService);
 
-  onSubmit(form: any) {
+  // 'NgForm' remove o erro de "Unexpected any"
+  onSubmit(form: NgForm) {
     this.authService.register(form.value).subscribe({
       next: (res) => {
-        alert("Sucesso: " + res.message);
+        alert('Sucesso: ' + res.message);
         form.reset();
       },
-      error: (err) => alert("Erro: " + err.error.message)
+      error: (err) => {
+        console.error(err); // Isto vai mostrar o erro real na consola (F12)
+        alert(
+          'Erro: ' +
+            (err.error?.message ||
+              'Não foi possível ligar ao servidor. O Rodrigo ligou o backend?'),
+        );
+      },
     });
   }
 }
