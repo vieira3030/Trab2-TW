@@ -1,1 +1,12 @@
-<p>search works!</p>
+<div class="search-container">
+  <h2>Pesquisar Jogador</h2>
+  
+  <div class="search-bar">
+    <input type="text" placeholder="Ex: Bruno Fernandes...">
+    <button (click)="onSearch()">Procurar</button>
+  </div>
+
+  <div class="results">
+    <app-player-card></app-player-card>
+  </div>
+</div>

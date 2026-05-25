@@ -14,6 +14,6 @@ export class PlayerCardComponent {
     name: 'Cristiano Ronaldo',
     club: 'Al Nassr',
     goals: 973,
-    photo: 'https://placehold.co/150x150/png?text=CR7'
+    photo: 'https://images.impresa.pt/sicnot/2026-05-22-cristiano-ronaldo-al-nassr--4-.jpg-f1e30469/original'
   };
 }
