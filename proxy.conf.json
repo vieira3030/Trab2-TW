@@ -1,8 +1,0 @@
-{
-  "/v4": {
-    "target": "https://api.football-data.org",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug"
-  }
-}

@@ -1,24 +1,26 @@
 <div class="search-container">
-  <h2>Jogos da Premier League</h2>
+  <h2>Plantel do Arsenal</h2>
   
   <div class="search-bar">
-    <button (click)="onSearch()">Carregar Jogos</button>
+    <button (click)="onSearch()">Carregar Plantel Completo</button>
   </div>
 
   <div class="results">
-    @for (match of matches.slice(0, 10); track match.id) {
-      <div class="match-card">
-        <div class="team-info">
-          <span class="team-name">{{ match.homeTeam.name }}</span>
-          <span class="vs">VS</span>
-          <span class="team-name">{{ match.awayTeam.name }}</span>
-        </div>
-        <div class="status">
-          <p>Estado: <strong>{{ match.status }}</strong></p>
+    @for (player of players; track player.id) {
+      <div class="match-card" style="display: flex; gap: 15px; text-align: left;">
+        
+        @if (player.photo) {
+          <img [src]="player.photo" alt="Foto" width="80" style="border-radius: 8px;">
+        }
+        
+        <div class="info">
+          <p style="margin: 0;"><strong>Nome:</strong> {{ player.name }}</p>
+          <p style="margin: 5px 0;"><strong>Idade:</strong> {{ player.age }} anos</p>
+          <p style="margin: 0;"><strong>Posição:</strong> {{ player.position }}</p>
         </div>
       </div>
     } @empty {
-      <p>Nenhum jogo carregado. Clica em "Carregar Jogos".</p>
+      <p>Nenhum jogador carregado. Clica no botão.</p>
     }
   </div>
 </div>
