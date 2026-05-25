@@ -1,18 +1,17 @@
 <div class="search-container">
-  <h2>Plantel do Arsenal</h2>
+  <h2>Pesquisar Plantel de Equipas</h2>
   
   <div class="search-bar">
-    <button (click)="onSearch()">Carregar Plantel Completo</button>
+    <input type="text" [(ngModel)]="teamName" placeholder="Nome da equipa (ex: Arsenal)">
+    <button (click)="onSearch()">Carregar Plantel</button>
   </div>
 
   <div class="results">
     @for (player of players; track player.id) {
-      <div class="match-card" style="display: flex; gap: 15px; text-align: left;">
-        
+      <div class="match-card" style="display: flex; gap: 15px; text-align: left; margin-bottom: 10px;">
         @if (player.photo) {
           <img [src]="player.photo" alt="Foto" width="80" style="border-radius: 8px;">
         }
-        
         <div class="info">
           <p style="margin: 0;"><strong>Nome:</strong> {{ player.name }}</p>
           <p style="margin: 5px 0;"><strong>Idade:</strong> {{ player.age }} anos</p>
@@ -20,7 +19,7 @@
         </div>
       </div>
     } @empty {
-      <p>Nenhum jogador carregado. Clica no botão.</p>
+      <p>Escreve o nome da equipa e carrega no botão para ver os jogadores.</p>
     }
   </div>
 </div>

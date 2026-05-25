@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { FootballService } from '../../services/football.service';
 
-// Estrutura de dados recebida pela API-Football
 export interface Player {
   id: number;
   name: string;
@@ -12,37 +12,48 @@ export interface Player {
   photo: string;
 }
 
+// Define a estrutura da resposta para pesquisa de equipa
+interface TeamResponse {
+  team: { id: number };
+}
+
+// Define a estrutura da resposta para o plantel
+interface SquadResponse {
+  players: Player[];
+}
+
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [CommonModule], 
+  imports: [CommonModule, FormsModule],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css'
 })
 export class SearchComponent {
-  // Guarda a lista de jogadores
   players: Player[] = [];
-
-  // Injeta o serviço
+  teamName = '';
   private footballService = inject(FootballService);
 
-  // Executa a pesquisa
-  // Executa a pesquisa
-onSearch() {
-  this.footballService.getPlayersByTeamId('42').subscribe({
-    // Substitui o 'any' pela estrutura exata que a API envia
-    next: (data: { response?: { players: Player[] }[] }) => {
-      
-      // Verifica se a resposta traz dados e extrai a lista de jogadores
-      if (data?.response && data.response.length > 0) {
-        this.players = data.response[0].players;
-        console.log('Plantel completo carregado:', this.players);
-      } else {
-        this.players = [];
+  onSearch() {
+    if (!this.teamName) return;
+
+    this.footballService.getTeamIdByName(this.teamName).subscribe({
+      next: (data: { response: TeamResponse[] }) => {
+        if (data.response && data.response.length > 0) {
+          const teamId = data.response[0].team.id.toString();
+          this.loadPlayers(teamId);
+        } else {
+          alert('Equipa não encontrada!');
+        }
       }
-      
-    },
-    error: (err) => console.error('Erro na API:', err)
-  });
-}
+    });
   }
+
+  private loadPlayers(id: string) {
+    this.footballService.getPlayersByTeamId(id).subscribe({
+      next: (data: { response: SquadResponse[] }) => {
+        this.players = data.response?.[0]?.players || [];
+      }
+    });
+  }
+}
