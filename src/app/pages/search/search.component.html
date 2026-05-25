@@ -1,12 +1,24 @@
 <div class="search-container">
-  <h2>Pesquisar Jogador</h2>
+  <h2>Jogos da Premier League</h2>
   
   <div class="search-bar">
-    <input type="text" placeholder="Ex: Bruno Fernandes...">
-    <button (click)="onSearch()">Procurar</button>
+    <button (click)="onSearch()">Carregar Jogos</button>
   </div>
 
   <div class="results">
-    <app-player-card></app-player-card>
+    @for (match of matches.slice(0, 10); track match.id) {
+      <div class="match-card">
+        <div class="team-info">
+          <span class="team-name">{{ match.homeTeam.name }}</span>
+          <span class="vs">VS</span>
+          <span class="team-name">{{ match.awayTeam.name }}</span>
+        </div>
+        <div class="status">
+          <p>Estado: <strong>{{ match.status }}</strong></p>
+        </div>
+      </div>
+    } @empty {
+      <p>Nenhum jogo carregado. Clica em "Carregar Jogos".</p>
+    }
   </div>
 </div>

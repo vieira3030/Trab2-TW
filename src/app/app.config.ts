@@ -1,13 +1,12 @@
-// app.config.ts
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http'; // Importar para AJAX
+import { provideHttpClient } from '@angular/common/http'; // Adiciona este import!
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes),
-    provideHttpClient() // Ativa o cliente HTTP
+    provideHttpClient() // Adiciona esta linha nos providers!
   ]
 };
-

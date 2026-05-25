@@ -1,19 +1,31 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// Importa o componente do cartão de jogador
-import { PlayerCardComponent } from '../../components/player-card/player-card.component'; 
+import { PlayerCardComponent } from '../../components/player-card/player-card.component';
+import { FootballService } from '../../services/football.service';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  // Coloca o PlayerCardComponent nos imports para o Angular o reconhecer no HTML
-  imports: [CommonModule, PlayerCardComponent], 
+  imports: [CommonModule, PlayerCardComponent],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css'
 })
 export class SearchComponent {
-  // Função ativada pelo clique no botão
+  // Array normal para guardar os jogos
+  matches: any[] = [];
+
+  constructor(private footballService: FootballService) {}
+
   onSearch() {
-    console.log('Pesquisa iniciada!');
+    this.footballService.getMatches().subscribe({
+      next: (data: any) => {
+        // Guarda os jogos recebidos da API
+        this.matches = data.matches || [];
+        console.log('Jogos carregados com sucesso:', this.matches);
+      },
+      error: (err) => {
+        console.error('Erro ao chamar a API:', err);
+      }
+    });
   }
 }
