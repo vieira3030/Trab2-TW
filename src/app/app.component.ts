@@ -1,15 +1,17 @@
-// src/app/app.component.ts
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router'; // Importar isto
-import { NavbarComponent } from './components/navbar/navbar.component'; // E isto
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ToastService } from './services/toast.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent], // Adicionar aqui na lista
+  imports: [CommonModule, RouterOutlet, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'FUTGOOD';
+  // Injeta o serviço para poder usar as mensagens no HTML
+  toastService = inject(ToastService);
 }

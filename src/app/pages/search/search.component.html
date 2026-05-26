@@ -8,16 +8,9 @@
 
   <div class="results">
     @for (player of players; track player.id) {
-      <div class="match-card" style="display: flex; gap: 15px; text-align: left; margin-bottom: 10px;">
-        @if (player.photo) {
-          <img [src]="player.photo" alt="Foto" width="80" style="border-radius: 8px;">
-        }
-        <div class="info">
-          <p style="margin: 0;"><strong>Nome:</strong> {{ player.name }}</p>
-          <p style="margin: 5px 0;"><strong>Idade:</strong> {{ player.age }} anos</p>
-          <p style="margin: 0;"><strong>Posição:</strong> {{ player.position }}</p>
-        </div>
-      </div>
+      
+      <app-player-card [player]="player"></app-player-card>
+
     } @empty {
       <p>Escreve o nome da equipa e carrega no botão para ver os jogadores.</p>
     }

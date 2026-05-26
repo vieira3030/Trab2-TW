@@ -1,10 +1,12 @@
-/* Alinhamento da página */
+/* Remove limites de largura e estica o contentor de uma ponta à outra */
 .search-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
+  padding: 2rem 40px; /* Margem de 40px dos lados */
   font-family: sans-serif;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .search-bar {
@@ -23,41 +25,23 @@ button {
 
 button:hover { background-color: #45a049; }
 
-/* Contentor dos cartões */
+/* Contentor dos cartões com CSS Grid */
 .results {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 colunas iguais */
+  gap: 40px; /* Espaço entre os cartões */
   width: 100%;
-  max-width: 500px;
+  margin-top: 30px;
 }
 
-/* Cartão do jogo */
-.match-card {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 15px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-  text-align: center;
+/* Ajuste para 2 colunas em ecrãs mais pequenos ou telemóveis */
+@media (max-width: 900px) {
+  .results {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
-
-.team-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 1.1rem;
-  font-weight: bold;
-}
-
-.vs {
-  color: #888;
-  font-size: 0.9rem;
-  padding: 0 10px;
-}
-
-.status p {
-  margin: 10px 0 0;
-  font-size: 0.9rem;
-  color: #666;
+@media (max-width: 600px) {
+  .results {
+    grid-template-columns: 1fr;
+  }
 }

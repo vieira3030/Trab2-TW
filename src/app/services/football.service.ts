@@ -1,24 +1,30 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Player } from '../pages/search/search.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FootballService {
-  private http = inject(HttpClient);
+  private baseUrl = 'https://v3.football.api-sports.io';
+  
   private headers = new HttpHeaders({
-    'x-apisports-key': 'ba5b2eebc07b5b528094756dda9d02dd'
+    'x-apisports-key': 'ba5b2eebc07b5b528094756dda9d02dd',
+    'x-rapidapi-host': 'v3.football.api-sports.io'
   });
 
-  getTeamIdByName(name: string) {
-  const url = `https://v3.football.api-sports.io/teams?search=${name}`;
-  // Alterado para evitar 'any' direto
-  return this.http.get<{ response: { team: { id: number } }[] }>(url, { headers: this.headers });
-}
+  private http = inject(HttpClient);
 
-getPlayersByTeamId(teamId: string) {
-  const url = `https://v3.football.api-sports.io/players/squads?team=${teamId}`;
-  return this.http.get<{ response: { players: Player[] }[] }>(url, { headers: this.headers });
-}
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+
+  getPlayerDetails(playerId: number) {
+    return this.http.get<any>(`${this.baseUrl}/players?id=${playerId}&season=2023`, { headers: this.headers });
+  }
+
+  getTeamIdByName(teamName: string) {
+    return this.http.get<any>(`${this.baseUrl}/teams?name=${teamName}`, { headers: this.headers });
+  }
+
+  getPlayersByTeamId(teamId: number) {
+    return this.http.get<any>(`${this.baseUrl}/players?team=${teamId}&season=2023`, { headers: this.headers });
+  }
 }

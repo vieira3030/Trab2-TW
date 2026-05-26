@@ -1,5 +1,8 @@
 <app-navbar></app-navbar>
+<router-outlet></router-outlet>
 
-<main>
-  <router-outlet></router-outlet>
-</main>
+@if (toastService.message | async; as msg) {
+  <div class="toast-notification">
+    {{ msg }}
+  </div>
+}

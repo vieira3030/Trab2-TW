@@ -1,0 +1,43 @@
+/* Alinhamento geral do ecrã de favoritos */
+.favorites-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 40px;
+  font-family: sans-serif;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+h2 {
+  color: #1a2a3a;
+  margin-bottom: 2rem;
+}
+
+/* Mantém as mesmas 4 colunas largas e organizadas */
+.results {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  width: 100%;
+}
+
+/* Formatação da mensagem de lista vazia */
+.empty-message {
+  grid-column: span 4;
+  text-align: center;
+  color: #666;
+  font-size: 1.1rem;
+  margin-top: 2rem;
+}
+
+/* Responsividade para ecrãs mais pequenos */
+@media (max-width: 900px) {
+  .results { grid-template-columns: repeat(2, 1fr); }
+  .empty-message { grid-column: span 2; }
+}
+
+@media (max-width: 600px) {
+  .results { grid-template-columns: 1fr; }
+  .empty-message { grid-column: span 1; }
+}

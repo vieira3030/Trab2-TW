@@ -1,29 +1,67 @@
 /* player-card.component.css */
 .card {
-  /* Design principal do cartão */
+  /* Design principal do cartão expandido para preencher a coluna toda */
   background: white;
   border-radius: 12px;
   padding: 20px;
-  width: 260px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
   text-align: center;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  border-top: 5px solid #4CAF50; /* Linha verde no topo */
+  border-top: 5px solid #4CAF50; /* Linha verde decorativa no topo */
   transition: transform 0.2s;
 }
 
 .card:hover {
-  /* Efeito ao passar o rato */
+  /* Efeito visual de elevação ao passar o rato */
   transform: translateY(-5px);
 }
 
+/* Contentor da foto com tamanho fixo e centrado */
+.photo-container {
+  position: relative; 
+  width: 140px; /* Tamanho reduzido para não desfocar */
+  margin: 0 auto 15px auto; /* O 'auto' centra a imagem no cartão */
+}
+
 .player-photo {
-  /* Estilo da fotografia */
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
+  /* A foto ocupa os 140px do contentor */
+  width: 100%;
+  height: 140px;
+  aspect-ratio: 1/1;
+  border-radius: 8px;
   object-fit: cover;
   border: 3px solid #f0f0f0;
-  margin-bottom: 15px;
+  display: block; 
+}
+
+/* --- BOTÃO DE FAVORITO (SISTEMA DE OLHEIRO) --- */
+.favorite-btn {
+  /* Fixa a estrela dentro do novo tamanho da foto */
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, background 0.2s;
+  z-index: 10;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.1);
+  background: rgba(0, 0, 0, 0.9);
 }
 
 .info h3 { 
@@ -34,13 +72,140 @@
 }
 
 .info p { 
-  /* Estatísticas */
+  /* Linhas das estatísticas do jogador */
   margin: 6px 0; 
   color: #555; 
   font-size: 1.1rem;
 }
 
 .info strong {
-  /* Destaque para os rótulos */
+  /* Destaca a negrito os rótulos das informações */
   color: #333;
+}
+
+/* --- BOTÃO DE FAVORITO (SISTEMA DE OLHEIRO) --- */
+.favorite-btn {
+  /* Fixa a estrela por cima da fotografia no canto superior direito */
+  position: absolute;
+  top: 10px; /* Reduzido de 15px para 10px */
+  right: 10px; /* Reduzido de 15px para 10px */
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  font-size: 18px;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, background 0.2s;
+  z-index: 10;
+}
+
+.favorite-btn:hover {
+  /* Aumenta ligeiramente a estrela ao passar o rato */
+  transform: scale(1.1);
+  background: rgba(0, 0, 0, 0.9);
+}
+
+/* ... MANTÉM O TEU CÓDIGO EXISTENTE AQUI ... */
+
+/* Adiciona o formato de ponteiro para indicar que o cartão é clicável */
+.card {
+  cursor: pointer;
+}
+
+/* --- ESTILOS DO MODAL DE DETALHES --- */
+
+/* Fundo escuro que cobre o ecrã todo */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Garante que fica por cima de tudo */
+}
+
+/* Caixa principal do modal */
+.modal-content {
+  background: #1e1e1e;
+  color: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  cursor: default; /* Remove o cursor de "mãozinha" dentro do modal */
+}
+
+/* Botão para fechar no canto superior direito */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #ff4a4a;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.close-btn:hover {
+  background: #e03b3b;
+}
+
+/* Zona do título e foto miniatura */
+.modal-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 20px;
+}
+
+.modal-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #00ff87;
+}
+
+.modal-body h3 {
+  color: #00ff87;
+  margin-bottom: 15px;
+}
+
+/* Grelha para distribuir as estatísticas de forma simétrica */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+/* Caixa individual de cada estatística */
+.stat-box {
+  background: #2a2a2a;
+  padding: 15px 10px;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.stat-box strong {
+  color: #888;
+  font-size: 0.9rem;
+  text-transform: uppercase;
 }

@@ -1,0 +1,11 @@
+<div class="favorites-container">
+  <h2>Estrela do Olheiro - O Meu Plantel</h2>
+
+  <div class="results">
+    @for (player of favoritePlayers; track player.name) {
+      <app-player-card [player]="player"></app-player-card>
+    } @empty {
+      <p class="empty-message">Ainda não guardaste nenhum jogador nos teus favoritos. Explora e clica na estrela! ⭐</p>
+    }
+  </div>
+</div>

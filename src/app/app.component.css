@@ -1,0 +1,23 @@
+/* Estilo da caixa de notificação e posição fixa no fundo do ecrã */
+.toast-notification {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  font-weight: bold;
+  z-index: 1000;
+  animation: fadeInOut 3s forwards; /* Aplica a animação de duração de 3 segundos */
+}
+
+/* Animação para aparecer a subir suavemente e desaparecer no final */
+@keyframes fadeInOut {
+  0% { opacity: 0; bottom: 10px; }
+  10% { opacity: 1; bottom: 30px; }
+  90% { opacity: 1; bottom: 30px; }
+  100% { opacity: 0; bottom: 10px; }
+}

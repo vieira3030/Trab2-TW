@@ -1,0 +1,41 @@
+<div class="profile-container">
+  <div class="profile-card">
+    <div class="profile-header">
+      <div class="avatar-circle">⚽</div>
+      <h2>Perfil do Olheiro</h2>
+    </div>
+    
+    <div class="profile-body">
+      <div class="info-group">
+        <span class="info-label">Nome de Utilizador</span>
+        @if (isEditing) {
+          <input type="text" [(ngModel)]="editUsername" class="edit-input">
+        } @else {
+          <p class="info-value">{{ username }}</p>
+        }
+      </div>
+      
+      <div class="info-group">
+        <span class="info-label">Função no Sistema</span>
+        @if (isEditing) {
+          <select [(ngModel)]="role" class="edit-select">
+            @for (r of funnyRoles; track r) {
+              <option [value]="r">{{ r }}</option>
+            }
+          </select>
+        } @else {
+          <p class="info-value">{{ role }}</p>
+        }
+      </div>
+    </div>
+
+    <div class="profile-footer">
+      @if (isEditing) {
+        <button type="button" (click)="saveProfile()" class="btn-save">Guardar Alterações</button>
+      } @else {
+        <button type="button" (click)="startEdit()" class="btn-edit">Editar Perfil</button>
+      }
+      <button type="button" (click)="logout()" class="btn-logout">Terminar Sessão</button>
+    </div>
+  </div>
+</div>

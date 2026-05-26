@@ -5,8 +5,13 @@ const db = require("./models"); // Importa a pasta de modelos que criaste
 
 const app = express();
 
-// Configurações básicas
-app.use(cors()); // Permite que o Frontend do André aceda a este Backend
+// --- CONFIGURAÇÃO CORS ---
+// Permite especificamente que o Angular (na porta 4200) aceda a este Backend
+const corsOptions = {
+  origin: "http://localhost:4200"
+};
+app.use(cors(corsOptions)); 
+
 app.use(express.json()); // Permite ler dados em formato JSON
 
 // --- LIGAÇÃO À BASE DE DADOS ---
@@ -24,9 +29,11 @@ app.get("/", (req, res) => {
   res.json({ message: "O backend do Caderno de Olheiro está a funcionar!" });
 });
 
+// --- ROTAS DA APLICAÇÃO ---
+require("./routes/auth.routes")(app); // Liga as rotas de autenticação
+
 // --- ARRANCAR O SERVIDOR ---
 const PORT = process.env.PORT || 8080;
-require("./routes/auth.routes")(app); // Liga as rotas de autenticação
 app.listen(PORT, () => {
   console.log(`Servidor a correr na porta ${PORT}.`);
 });

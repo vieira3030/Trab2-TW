@@ -1,8 +1,53 @@
-<div class="card">
-  <img [src]="player.photo" alt="Foto de {{ player.name }}" class="player-photo">
+<div class="card" (click)="openModal()" tabindex="0" (keydown.enter)="openModal()">
+  <div class="photo-container">
+    <img [src]="player.photo" alt="Foto de {{ player.name }}" class="player-photo">
+    
+    <button type="button" class="favorite-btn" (click)="toggleFavorite($event)" title="Guardar nos favoritos">
+      @if (isFavorite) {
+        ⭐
+      } @else {
+        ☆
+      }
+    </button>
+  </div>
+  
   <div class="info">
     <h3>{{ player.name }}</h3>
-    <p><strong>Clube:</strong> {{ player.club }}</p>
-    <p><strong>Golos:</strong> {{ player.goals }}</p>
+    
+    @if (player.club) { <p><strong>Clube:</strong> {{ player.club }}</p> }
+    @if (player.goals) { <p><strong>Golos:</strong> {{ player.goals }}</p> }
+    @if (player.position) { <p><strong>Posição:</strong> {{ player.position }}</p> }
+    @if (player.age) { <p><strong>Idade:</strong> {{ player.age }} anos</p> }
   </div>
 </div>
+
+@if (showModal) {
+ <div class="modal-overlay" (click)="closeModal($event)" tabindex="0" (keydown.enter)="closeModal($event)">
+    
+    <div class="modal-content" (click)="$event.stopPropagation()" tabindex="0" (keydown.enter)="$event.stopPropagation()">
+      
+      <button class="close-btn" (click)="closeModal($event)">X</button>
+      
+      <div class="modal-header">
+        <img [src]="player.photo" alt="Foto de {{ player.name }}" class="modal-photo">
+        <h2>{{ player.name }}</h2>
+      </div>
+
+      <div class="modal-body">
+        <h3>Estatísticas Detalhadas</h3>
+       <div class="stats-grid">
+          <div class="stat-box"><strong>Idade:</strong> <br> {{ player.age || 'N/A' }}</div>
+          <div class="stat-box"><strong>Peso:</strong> <br> {{ player.weight || 'N/A' }}</div>
+          <div class="stat-box"><strong>Altura:</strong> <br> {{ player.height || 'N/A' }}</div>
+          <div class="stat-box"><strong>Nota (Rating):</strong> <br> ⭐ {{ player.rating || 'N/A' }}</div>
+          <div class="stat-box"><strong>Minutos:</strong> <br> ⏱️ {{ player.minutes || 0 }}</div>
+          <div class="stat-box"><strong>Golos:</strong> <br> ⚽ {{ player.goals || 0 }}</div>
+          <div class="stat-box"><strong>Assistências:</strong> <br> 👟 {{ player.assists || 0 }}</div>
+          <div class="stat-box"><strong>Cartões:</strong> <br> 🟨 {{ player.yellowCards || 0 }}</div>
+          <div class="stat-box"><strong>Cartões:</strong> <br> 🟥 {{ player.redCards || 0 }}</div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+}

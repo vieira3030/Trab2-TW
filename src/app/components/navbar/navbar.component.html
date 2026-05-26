@@ -2,7 +2,14 @@
   <div class="logo">⚽ Olheiro Pro</div>
   <ul class="nav-links">
     <li><a routerLink="/">Início</a></li>
-    <li><a routerLink="/login">Login</a></li>
-    <li><a routerLink="/register">Registo</a></li>
+    <li><a routerLink="/search">Pesquisar Clubes</a></li>
+    
+    @if (isLoggedIn) {
+      <li><a routerLink="/favorites">Meus Favoritos</a></li>
+      <li><a routerLink="/profile">O Meu Perfil</a></li>
+    } @else {
+      <li><a routerLink="/login">Login</a></li>
+      <li><a routerLink="/register">Registo</a></li>
+    }
   </ul>
 </nav>

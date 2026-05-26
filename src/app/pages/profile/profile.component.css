@@ -1,0 +1,138 @@
+/* Centra o conteúdo do perfil no ecrã */
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  min-height: 70vh;
+}
+
+/* Estilo do cartão principal com fundo escuro */
+.profile-card {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 30px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Círculo verde do avatar */
+.avatar-circle {
+  width: 80px;
+  height: 80px;
+  background: #00ff87;
+  font-size: 40px;
+  line-height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 15px;
+}
+
+/* Título principal do perfil */
+.profile-header h2 {
+  color: #fff;
+  margin: 0 0 25px 0;
+  font-size: 24px;
+}
+
+/* Alinha as informações à esquerda */
+.profile-body {
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+/* Margem entre cada bloco de informação */
+.info-group {
+  margin-bottom: 15px;
+}
+
+/* Etiqueta das informações (ex: 'Nome de Utilizador') */
+.info-group .info-label {
+  font-size: 12px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: block; 
+}
+
+/* Valor das informações com caixa de fundo escuro */
+.info-value {
+  color: #fff;
+  font-size: 16px;
+  margin: 5px 0 0 0;
+  padding: 10px;
+  background: #2a2a2a;
+  border-radius: 6px;
+}
+
+/* Estilo do botão vermelho de logout */
+.btn-logout {
+  width: 100%;
+  background: #ff4a4a;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+/* Efeito ao passar o rato no botão de logout */
+.btn-logout:hover {
+  background: #e03b3b;
+}
+
+/* --- ESTILOS DO MODO DE EDIÇÃO --- */
+
+/* Caixas de texto e lista de seleção */
+.edit-input, .edit-select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  background: #2a2a2a;
+  border: 1px solid #444;
+  color: white;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* Efeito ao clicar para escrever */
+.edit-input:focus, .edit-select:focus {
+  outline: none;
+  border-color: #00ff87;
+}
+
+/* Botões de Guardar e Editar */
+.btn-edit, .btn-save {
+  width: 100%;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-bottom: 10px; /* Separa o botão do Terminar Sessão */
+}
+
+/* Cores específicas de cada botão */
+.btn-edit {
+  background: #4CAF50;
+  color: white;
+}
+.btn-edit:hover {
+  background: #45a049;
+}
+
+.btn-save {
+  background: #00ff87;
+  color: #000;
+}
+.btn-save:hover {
+  background: #00cc6a;
+}
