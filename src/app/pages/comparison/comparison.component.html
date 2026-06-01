@@ -1,0 +1,20 @@
+<div class="comparison-container">
+  <h2>Comparador de Jogadores ⚖️</h2>
+
+  <div class="arena">
+    <div class="player-slot">
+      <app-player-card [player]="player1"></app-player-card>
+    </div>
+
+    <div class="vs-section">
+      <div class="vs-badge">VS</div>
+      <button class="btn-save-comparison" (click)="saveComparison()">
+        💾 Guardar Comparação
+      </button>
+    </div>
+
+    <div class="player-slot">
+      <app-player-card [player]="player2"></app-player-card>
+    </div>
+  </div>
+</div>

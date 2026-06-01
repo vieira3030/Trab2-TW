@@ -1,0 +1,69 @@
+/* Contentor principal do ecrã */
+.comparison-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 20px;
+  font-family: sans-serif;
+}
+
+/* Estrutura lado a lado */
+.arena {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+  width: 100%;
+  max-width: 900px;
+}
+
+/* Espaço de cada cartão */
+.player-slot {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+/* Secção central (VS e Botão) */
+.vs-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Círculo do "VS" */
+.vs-badge {
+  background-color: #1f2937;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 15px 20px;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Botão de guardar comparação */
+.btn-save-comparison {
+  background-color: #10b981;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.btn-save-comparison:hover {
+  background-color: #059669;
+}
+
+/* Responsividade: passa os cartões para cima/baixo em ecrãs pequenos */
+@media (max-width: 768px) {
+  .arena {
+    flex-direction: column;
+  }
+}
