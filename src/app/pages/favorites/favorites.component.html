@@ -1,11 +1,19 @@
 <div class="favorites-container">
-  <h2>Estrela do Olheiro - O Meu Plantel</h2>
+  <h2>A Minha Lista de Jogadores ⭐</h2>
 
   <div class="results">
-    @for (player of favoritePlayers; track player.name) {
-      <app-player-card [player]="player"></app-player-card>
+    @for (player of favoritePlayers; track player.playerId) {
+      <div class="favorite-card">
+        <img [src]="player.playerPhoto" alt="Foto de {{ player.playerName }}">
+        <h3>{{ player.playerName }}</h3>
+        
+        <button class="btn-remove">❌ Remover</button>
+      </div>
     } @empty {
-      <p class="empty-message">Ainda não guardaste nenhum jogador nos teus favoritos. Explora e clica na estrela! ⭐</p>
+      <div class="empty-state">
+        <p>Ainda não tens jogadores guardados.</p>
+        <p>Vai à página de pesquisa para recrutares talento!</p>
+      </div>
     }
   </div>
 </div>
