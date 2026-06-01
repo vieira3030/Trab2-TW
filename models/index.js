@@ -2,10 +2,11 @@
 const dbConfig = require("../config/db.config.js");
 const Sequelize = require("sequelize");
 
+// Configura e inicializa a ligação à base de dados SQLite
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   dialect: dbConfig.dialect,
-  storage: dbConfig.storage, // Adiciona esta linha para o SQLite funcionar
+  storage: dbConfig.storage, // Define o caminho do ficheiro de base de dados SQLite
   pool: {
     max: dbConfig.pool.max,
     min: dbConfig.pool.min,
@@ -18,16 +19,21 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-// 1. Inicializar os modelos
+// Inicializa os modelos da base de dados
 db.users = require("./user.model.js")(sequelize, Sequelize);
-db.favorites = require("./favorite.model.js")(sequelize, Sequelize); // Novo modelo
+db.favorites = require("./favorite.model.js")(sequelize, Sequelize);
+db.comparisons = require("./comparison.model.js")(sequelize, Sequelize); // Inicializa o modelo das comparações
 
-// 2. Definir as relações (Chaves Estrangeiras)
-// Um Utilizador pode ter vários Favoritos
+// Define a relação 1:N entre Utilizadores e Favoritos
 db.users.hasMany(db.favorites, { as: "favorites" });
-
-// Um Favorito pertence a um único Utilizador
 db.favorites.belongsTo(db.users, {
+  foreignKey: "userId",
+  as: "user",
+});
+
+// Define a relação 1:N entre Utilizadores e Comparações
+db.users.hasMany(db.comparisons, { as: "comparisons" });
+db.comparisons.belongsTo(db.users, {
   foreignKey: "userId",
   as: "user",
 });

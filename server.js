@@ -32,6 +32,7 @@ app.get("/", (req, res) => {
 // --- ROTAS DA APLICAÇÃO ---
 require("./routes/auth.routes")(app); // Inicia rotas de autenticação
 require("./routes/favorite.routes")(app); // Inicia rotas de favoritos
+require("./routes/comparison.routes")(app); // Inicia rotas de comparações
 
 // --- ARRANCAR O SERVIDOR ---
 const PORT = process.env.PORT || 8080;
