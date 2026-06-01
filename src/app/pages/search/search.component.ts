@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FootballService } from '../../services/football.service';
-// Importa o componente do cartão de jogador
 import { PlayerCardComponent } from '../../components/player-card/player-card.component';
 
 // Define a estrutura de dados do jogador
@@ -15,20 +14,9 @@ export interface Player {
   photo: string;
 }
 
-// Define a estrutura da resposta para procurar a equipa
-interface TeamResponse {
-  team: { id: number };
-}
-
-// Define a estrutura da resposta para listar o plantel
-interface SquadResponse {
-  players: Player[];
-}
-
 @Component({
   selector: 'app-search',
   standalone: true,
-  // Associa os módulos e componentes necessários
   imports: [CommonModule, FormsModule, PlayerCardComponent], 
   templateUrl: './search.component.html',
   styleUrl: './search.component.css'
@@ -36,34 +24,50 @@ interface SquadResponse {
 export class SearchComponent {
   players: Player[] = [];
   teamName = '';
-  
-  // Injeta o serviço de futebol para comunicar com a API
   private footballService = inject(FootballService);
 
-  // Executa a pesquisa ao submeter o formulário
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+
+  // Inicia a pesquisa pelo nome da equipa inserido
   onSearch() {
     if (!this.teamName) return;
 
-    // Procura o ID da equipa através do nome inserido
+    console.log(`1. A pesquisar a equipa: ${this.teamName}...`);
+
     this.footballService.getTeamIdByName(this.teamName).subscribe({
-      next: (data: { response: TeamResponse[] }) => {
+      next: (data: any) => {
+        console.log('2. Resposta da API ao procurar equipa:', data);
+
+        // Se a equipa for encontrada, extrai o ID e carrega o plantel
         if (data.response && data.response.length > 0) {
-          // Extrai o ID da equipa (mantido como número)
           const teamId = data.response[0].team.id;
+          console.log(`3. ID da equipa encontrado: ${teamId}. A carregar jogadores...`);
           this.loadPlayers(teamId);
         } else {
-          alert('Equipa não encontrada!');
+          alert('Equipa não encontrada! Abre a consola (F12) para ver o erro escondido da API.');
         }
+      },
+      error: (err: any) => {
+        console.error('Erro de ligação ao tentar procurar a equipa:', err);
       }
     });
   }
 
-  // Carrega a lista de jogadores usando o ID numérico da equipa
+  // Obtém a lista de jogadores da equipa especificada
   private loadPlayers(id: number) {
+    console.log(`4. A pedir plantel da equipa ${id}...`);
+    
     this.footballService.getPlayersByTeamId(id).subscribe({
-      next: (data: { response: SquadResponse[] }) => {
-        // Atualiza a lista de jogadores com a resposta da API
+      next: (data: any) => {
+        console.log('5. Resposta completa do plantel:', data);
+        
+        // Guarda a lista completa de jogadores devolvida pela API
         this.players = data.response?.[0]?.players || [];
+        
+        console.log('6. Plantel completo guardado:', this.players);
+      },
+      error: (err: any) => {
+        console.error('Erro de ligação ao pedir jogadores:', err);
       }
     });
   }

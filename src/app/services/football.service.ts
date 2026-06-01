@@ -25,6 +25,6 @@ export class FootballService {
   }
 
   getPlayersByTeamId(teamId: number) {
-    return this.http.get<any>(`${this.baseUrl}/players?team=${teamId}&season=2023`, { headers: this.headers });
+    return this.http.get<any>(`${this.baseUrl}/players/squads?team=${teamId}`, { headers: this.headers });
   }
 }
