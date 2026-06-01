@@ -18,6 +18,18 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+// 1. Inicializar os modelos
 db.users = require("./user.model.js")(sequelize, Sequelize);
+db.favorites = require("./favorite.model.js")(sequelize, Sequelize); // Novo modelo
+
+// 2. Definir as relações (Chaves Estrangeiras)
+// Um Utilizador pode ter vários Favoritos
+db.users.hasMany(db.favorites, { as: "favorites" });
+
+// Um Favorito pertence a um único Utilizador
+db.favorites.belongsTo(db.users, {
+  foreignKey: "userId",
+  as: "user",
+});
 
 module.exports = db;

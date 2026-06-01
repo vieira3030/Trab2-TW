@@ -1,21 +1,21 @@
-// server.js - O ponto de entrada do teu backend
+// server.js - Ponto de entrada do backend
 const express = require("express");
 const cors = require("cors");
-const db = require("./models"); // Importa a pasta de modelos que criaste
+const db = require("./models"); // Importa os modelos da base de dados
 
 const app = express();
 
 // --- CONFIGURAÇÃO CORS ---
-// Permite especificamente que o Angular (na porta 4200) aceda a este Backend
+// Permite acessos do Angular (porta 4200)
 const corsOptions = {
   origin: "http://localhost:4200"
 };
 app.use(cors(corsOptions)); 
 
-app.use(express.json()); // Permite ler dados em formato JSON
+app.use(express.json()); // Processa pedidos em formato JSON
 
 // --- LIGAÇÃO À BASE DE DADOS ---
-// O .sync() olha para o teu user.model.js e cria a tabela se ela não existir
+// Sincroniza os modelos e cria as tabelas caso não existam
 db.sequelize.sync()
   .then(() => {
     console.log("Sucesso: Base de dados sincronizada e tabelas prontas!");
@@ -30,7 +30,8 @@ app.get("/", (req, res) => {
 });
 
 // --- ROTAS DA APLICAÇÃO ---
-require("./routes/auth.routes")(app); // Liga as rotas de autenticação
+require("./routes/auth.routes")(app); // Inicia rotas de autenticação
+require("./routes/favorite.routes")(app); // Inicia rotas de favoritos
 
 // --- ARRANCAR O SERVIDOR ---
 const PORT = process.env.PORT || 8080;
