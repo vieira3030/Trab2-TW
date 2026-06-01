@@ -1,22 +1,31 @@
-/* Centra o conteúdo do perfil no ecrã */
+/* Centra o conteúdo e empilha os cartões com espaçamento */
 .profile-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  gap: 30px;
   padding: 40px 20px;
   min-height: 70vh;
+  font-family: sans-serif;
 }
 
-/* Estilo do cartão principal com fundo escuro */
-.profile-card {
+/* Estilo base dos cartões com fundo escuro */
+.profile-card, .history-card {
   background: #1e1e1e;
   border: 1px solid #333;
   border-radius: 12px;
   padding: 30px;
   width: 100%;
-  max-width: 400px;
   text-align: center;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.profile-card {
+  max-width: 400px;
+}
+
+.history-card {
+  max-width: 600px; /* Mais largo para caberem os jogadores lado a lado */
 }
 
 /* Círculo verde do avatar */
@@ -30,14 +39,14 @@
   margin: 0 auto 15px;
 }
 
-/* Título principal do perfil */
-.profile-header h2 {
+/* Títulos das secções */
+.profile-header h2, .history-card h2 {
   color: #fff;
   margin: 0 0 25px 0;
   font-size: 24px;
 }
 
-/* Alinha as informações à esquerda */
+/* Alinha as informações do perfil à esquerda */
 .profile-body {
   text-align: left;
   margin-bottom: 30px;
@@ -48,7 +57,7 @@
   margin-bottom: 15px;
 }
 
-/* Etiqueta das informações (ex: 'Nome de Utilizador') */
+/* Etiqueta das informações */
 .info-group .info-label {
   font-size: 12px;
   color: #888;
@@ -67,7 +76,7 @@
   border-radius: 6px;
 }
 
-/* Estilo do botão vermelho de logout */
+/* --- ESTILOS DOS BOTÕES E INPUTS --- */
 .btn-logout {
   width: 100%;
   background: #ff4a4a;
@@ -81,14 +90,10 @@
   transition: background 0.2s;
 }
 
-/* Efeito ao passar o rato no botão de logout */
 .btn-logout:hover {
   background: #e03b3b;
 }
 
-/* --- ESTILOS DO MODO DE EDIÇÃO --- */
-
-/* Caixas de texto e lista de seleção */
 .edit-input, .edit-select {
   width: 100%;
   padding: 10px;
@@ -101,13 +106,11 @@
   box-sizing: border-box;
 }
 
-/* Efeito ao clicar para escrever */
 .edit-input:focus, .edit-select:focus {
   outline: none;
   border-color: #00ff87;
 }
 
-/* Botões de Guardar e Editar */
 .btn-edit, .btn-save {
   width: 100%;
   border: none;
@@ -117,22 +120,77 @@
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.2s;
-  margin-bottom: 10px; /* Separa o botão do Terminar Sessão */
+  margin-bottom: 10px;
 }
 
-/* Cores específicas de cada botão */
 .btn-edit {
   background: #4CAF50;
   color: white;
 }
-.btn-edit:hover {
-  background: #45a049;
-}
+.btn-edit:hover { background: #45a049; }
 
 .btn-save {
   background: #00ff87;
   color: #000;
 }
-.btn-save:hover {
-  background: #00cc6a;
+.btn-save:hover { background: #00cc6a; }
+
+
+/* --- HISTÓRICO DE COMPARAÇÕES --- */
+.comparisons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Fundo da linha da comparação */
+.comp-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #2a2a2a;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+/* Estilo das fotos e nomes */
+.player-mini {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 110px;
+  color: white;
+  font-size: 14px;
+}
+
+.player-mini img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 5px;
+  border: 2px solid #00ff87;
+}
+
+.vs-text {
+  font-weight: bold;
+  color: #00ff87;
+}
+
+/* Botão de eliminar item da lista */
+.btn-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: transform 0.2s;
+}
+
+.btn-delete:hover {
+  transform: scale(1.2);
+}
+
+.empty-msg {
+  color: #888;
+  margin-top: 1rem;
 }

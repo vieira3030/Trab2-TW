@@ -1,4 +1,6 @@
 <div class="profile-container">
+  
+  <!-- Secção 1: Dados do Perfil (Original) -->
   <div class="profile-card">
     <div class="profile-header">
       <div class="avatar-circle">⚽</div>
@@ -38,4 +40,34 @@
       <button type="button" (click)="logout()" class="btn-logout">Terminar Sessão</button>
     </div>
   </div>
+
+  <!-- Secção 2: Histórico de Comparações (Nova) -->
+  <div class="history-card">
+    <h2>O Meu Histórico 📊</h2>
+    
+    <div class="comparisons-list">
+      <!-- Faz um loop pelas comparações -->
+      @for (comp of comparisons; track comp.id) {
+        <div class="comp-card">
+          <div class="player-mini">
+            <img [src]="comp.player1Photo" alt="{{ comp.player1Name }}">
+            <span>{{ comp.player1Name }}</span>
+          </div>
+          
+          <div class="vs-text">VS</div>
+          
+          <div class="player-mini">
+            <img [src]="comp.player2Photo" alt="{{ comp.player2Name }}">
+            <span>{{ comp.player2Name }}</span>
+          </div>
+
+          <button class="btn-delete" (click)="removeComparison(comp.id)">❌</button>
+        </div>
+      } @empty {
+        <!-- Aparece se a lista estiver vazia -->
+        <p class="empty-msg">Ainda não tens comparações guardadas no teu histórico.</p>
+      }
+    </div>
+  </div>
+
 </div>

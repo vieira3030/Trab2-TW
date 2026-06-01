@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ComparisonService {
-  // O URL da rota que o Rodrigo criou
+  // O URL da rota base do backend
   private apiUrl = 'http://localhost:8080/api/comparisons';
   
   private http = inject(HttpClient);
@@ -22,5 +22,16 @@ export class ComparisonService {
       player2Photo: player2.photo
     };
     return this.http.post(this.apiUrl, body);
+  }
+
+  // Vai buscar a lista de comparações à API
+   
+  getComparisons() {
+    return this.http.get<unknown[]>(this.apiUrl);
+  }
+
+  // Apaga uma comparação usando o seu ID
+  deleteComparison(id: number) {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }
