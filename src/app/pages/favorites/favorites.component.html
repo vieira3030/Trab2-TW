@@ -7,7 +7,7 @@
         <img [src]="player.playerPhoto" alt="Foto de {{ player.playerName }}">
         <h3>{{ player.playerName }}</h3>
         
-        <button class="btn-remove">❌ Remover</button>
+        <button class="btn-remove" (click)="removePlayer(player.playerId)">❌ Remover</button>
       </div>
     } @empty {
       <div class="empty-state">
