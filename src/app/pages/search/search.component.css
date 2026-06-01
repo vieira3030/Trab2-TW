@@ -40,8 +40,48 @@ button:hover { background-color: #45a049; }
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
 @media (max-width: 600px) {
   .results {
     grid-template-columns: 1fr;
   }
+}
+
+/* --- NOVOS ESTILOS: ERRO E CARREGAMENTO --- */
+
+/* Estilos para a caixa de erro vermelha */
+.error-box {
+  background-color: #fee2e2;
+  color: #991b1b;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  margin: 20px 0;
+  border: 1px solid #f87171;
+  width: 100%;
+  max-width: 400px; /* Evita que a caixa fique demasiado larga */
+}
+
+/* Centrar o texto e a animação de loading */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px 0;
+}
+
+/* Criar o círculo animado do spinner */
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #4CAF50; /* Cor verde igual à do botão */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+/* Animação de rotação contínua */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

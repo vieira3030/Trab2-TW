@@ -6,13 +6,26 @@
     <button (click)="onSearch()">Carregar Plantel</button>
   </div>
 
+  @if (errorMessage) {
+    <div class="error-box">
+      <p>⚠️ {{ errorMessage }}</p>
+    </div>
+  }
+
+  @if (isLoading) {
+    <div class="loading-spinner">
+      <div class="spinner"></div>
+      <p>A carregar plantel...</p>
+    </div>
+  }
+
   <div class="results">
     @for (player of players; track player.id) {
-      
       <app-player-card [player]="player"></app-player-card>
-
     } @empty {
-      <p>Escreve o nome da equipa e carrega no botão para ver os jogadores.</p>
+      @if (!isLoading && !errorMessage) {
+        <p>Escreve o nome da equipa e carrega no botão para ver os jogadores.</p>
+      }
     }
   </div>
 </div>

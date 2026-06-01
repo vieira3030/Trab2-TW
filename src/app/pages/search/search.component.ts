@@ -24,6 +24,11 @@ export interface Player {
 export class SearchComponent {
   players: Player[] = [];
   teamName = '';
+  
+  // Novas variáveis para controlar o carregamento e os erros no HTML
+  isLoading = false;
+  errorMessage = '';
+  
   private footballService = inject(FootballService);
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -31,6 +36,11 @@ export class SearchComponent {
   // Inicia a pesquisa pelo nome da equipa inserido
   onSearch() {
     if (!this.teamName) return;
+
+    // 1. Limpa erros antigos, limpa jogadores e liga a animação
+    this.errorMessage = '';
+    this.players = [];
+    this.isLoading = true;
 
     console.log(`1. A pesquisar a equipa: ${this.teamName}...`);
 
@@ -44,16 +54,20 @@ export class SearchComponent {
           console.log(`3. ID da equipa encontrado: ${teamId}. A carregar jogadores...`);
           this.loadPlayers(teamId);
         } else {
-          alert('Equipa não encontrada! Abre a consola (F12) para ver o erro escondido da API.');
+          // 2. Substitui o 'alert' nativo pela variável que o HTML vai mostrar
+          this.errorMessage = 'Equipa não encontrada! Verifica o nome e tenta novamente.';
+          this.isLoading = false; // Desliga a animação
         }
       },
       error: (err: any) => {
         console.error('Erro de ligação ao tentar procurar a equipa:', err);
+        this.errorMessage = 'Erro de ligação à API. Tenta novamente mais tarde.';
+        this.isLoading = false;
       }
     });
   }
 
-  // Obtém a lista de jogadores da equipa especificada
+  // Carrega todos os jogadores do plantel da equipa
   private loadPlayers(id: number) {
     console.log(`4. A pedir plantel da equipa ${id}...`);
     
@@ -63,11 +77,15 @@ export class SearchComponent {
         
         // Guarda a lista completa de jogadores devolvida pela API
         this.players = data.response?.[0]?.players || [];
-        
         console.log('6. Plantel completo guardado:', this.players);
+        
+        // 3. Tudo correu bem, desliga a animação de carregamento
+        this.isLoading = false;
       },
       error: (err: any) => {
         console.error('Erro de ligação ao pedir jogadores:', err);
+        this.errorMessage = 'Erro ao carregar os jogadores. Tenta novamente.';
+        this.isLoading = false;
       }
     });
   }
