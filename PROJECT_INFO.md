@@ -3,7 +3,7 @@
 ## Group Members
 
 - Student 1: Rodrigo Vieira
-- Student 2: André
+- Student 2: André Flores
 - Student 3: Eduardo
 
 ## Project Theme
