@@ -36,3 +36,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           # O caminho gerado pelo Angular. Altera se o nome da pasta for diferente!
           publish_dir: ./frontend/dist/webtech-final-project-frontend-template/browser
+
+          # forçar arranque do deploy mesmo que não haja mudanças (útil para testar o workflow)
