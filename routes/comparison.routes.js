@@ -1,4 +1,5 @@
 const comparisons = require("../controllers/comparison.controller.js");
+const { verifyToken } = require("../middlewares/auth.js"); // Importa o teu novo porteiro
 
 module.exports = function(app) {
   app.use(function(req, res, next) {
@@ -6,12 +7,8 @@ module.exports = function(app) {
     next();
   });
 
-  const mockAuth = (req, res, next) => {
-    req.userId = 1; 
-    next();
-  };
-
-  app.post("/api/comparisons", mockAuth, comparisons.create);
-  app.get("/api/comparisons", mockAuth, comparisons.findAll);
-  app.delete("/api/comparisons/:id", mockAuth, comparisons.delete);
+  // O mockAuth foi substituído pelo verifyToken
+  app.post("/api/comparisons", verifyToken, comparisons.create);
+  app.get("/api/comparisons", verifyToken, comparisons.findAll);
+  app.delete("/api/comparisons/:id", verifyToken, comparisons.delete);
 };
