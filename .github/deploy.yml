@@ -1,4 +1,3 @@
-
 name: Deploy Frontend ao GitHub Pages
 
 on:
@@ -22,18 +21,18 @@ jobs:
 
       - name: Instalar dependências
         working-directory: ./frontend
-        run: npm install
+        run: |
+          rm -rf node_modules
+          npm install
 
       - name: Build do Angular
         working-directory: ./frontend
-        # A flag base-href é obrigatória para o site funcionar no GitHub Pages
-        run: npm run build -- --base-href /Trab2-TW/
+        run: |
+          chmod +x ./node_modules/.bin/ng
+          npm run build -- --base-href /Trab2-TW/
 
       - name: Deploy para GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # O caminho gerado pelo Angular. Altera se o nome da pasta for diferente!
           publish_dir: ./frontend/dist/webtech-final-project-frontend-template/browser
-
-          # forçar arranque do deploy mesmo que não haja mudanças (útil para testar o workflow)
