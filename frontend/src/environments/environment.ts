@@ -1,6 +1,4 @@
 export const environment = {
-  production: false,
-  apiKey: '0c919ab090a1481297f282d3e4f2280d',
-  // O Angular agora usa o proxy /v4 que criámos
-  apiUrl: '/v4/' 
+  production: true,
+  apiUrl: 'https://trab2-tw.onrender.com' // A URL que viste no painel do Render
 };
