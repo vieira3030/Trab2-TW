@@ -18,15 +18,6 @@ require("./routes/auth.routes")(app);
 require("./routes/favorite.routes")(app);
 require("./routes/comparison.routes")(app);
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Servidor a correr na porta ${PORT}.`);
-});
-
-require("./routes/auth.routes")(app);
-require("./routes/favorite.routes")(app);
-require("./routes/comparison.routes")(app);
-
 // --- ARRANCAR O SERVIDOR ---
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
