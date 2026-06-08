@@ -1,38 +1,35 @@
 // server.js - Ponto de entrada do backend
 const express = require("express");
 const cors = require("cors");
-const db = require("./models"); // Importa os modelos da base de dados
+const db = require("./models");
 
 const app = express();
 
 // --- CONFIGURAÇÃO CORS ---
-// Permite acessos do Angular (porta 4200)
-const corsOptions = {
-  origin: "http://localhost:4200"
-};
-app.use(cors(corsOptions)); 
+// Em produção, o Render pode alterar a origem. 
+// O cors() sem argumentos permite qualquer origem, o que facilita o deploy.
+app.use(cors()); 
 
-app.use(express.json()); // Processa pedidos em formato JSON
+app.use(express.json());
 
 // --- LIGAÇÃO À BASE DE DADOS ---
-// Sincroniza os modelos e cria as tabelas caso não existam
-db.sequelize.sync()
+// Usamos { force: false } para não apagar os dados existentes ao reiniciar
+db.sequelize.sync({ force: false })
   .then(() => {
-    console.log("Sucesso: Base de dados sincronizada e tabelas prontas!");
+    console.log("Sucesso: Base de dados sincronizada!");
   })
   .catch((err) => {
-    console.error("Erro ao ligar à base de dados: ", err.message);
+    console.error("Erro na base de dados: ", err.message);
   });
 
-// --- ROTA DE TESTE ---
+// --- ROTAS ---
 app.get("/", (req, res) => {
-  res.json({ message: "O backend do Caderno de Olheiro está a funcionar!" });
+  res.json({ message: "O backend do Olheiro Pro está online!" });
 });
 
-// --- ROTAS DA APLICAÇÃO ---
-require("./routes/auth.routes")(app); // Inicia rotas de autenticação
-require("./routes/favorite.routes")(app); // Inicia rotas de favoritos
-require("./routes/comparison.routes")(app); // Inicia rotas de comparações
+require("./routes/auth.routes")(app);
+require("./routes/favorite.routes")(app);
+require("./routes/comparison.routes")(app);
 
 // --- ARRANCAR O SERVIDOR ---
 const PORT = process.env.PORT || 8080;
