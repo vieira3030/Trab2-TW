@@ -3,7 +3,9 @@ name: Deploy Frontend ao GitHub Pages
 on:
   push:
     branches:
-      - Dev  # Executa o deploy sempre que enviares código para a branch Dev
+      - Dev
+      - main
+      - master
 
 jobs:
   deploy:
