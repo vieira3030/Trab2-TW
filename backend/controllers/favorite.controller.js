@@ -1,4 +1,4 @@
-const db = require("../backend/models");
+const db = require("../models");
 const Favorite = db.favorites;
 
 // Guardar um novo jogador nos favoritos
