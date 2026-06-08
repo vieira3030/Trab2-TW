@@ -1,5 +1,5 @@
-/* Centra o conteúdo e empilha os cartões com espaçamento */
-.profile-container {
+/* --- ALINHAMENTO GERAL DA PÁGINA --- */
+.profile-page-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,188 +9,188 @@
   font-family: sans-serif;
 }
 
-/* Estilo base dos cartões com fundo escuro */
-.profile-card, .history-card {
+/* --- ESTILOS DOS CARTÕES PRINCIPAIS --- */
+.profile-card, .history-section {
   background: #1e1e1e;
   border: 1px solid #333;
   border-radius: 12px;
   padding: 30px;
   width: 100%;
-  text-align: center;
+  max-width: 500px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  color: white;
 }
 
-.profile-card {
-  max-width: 400px;
+/* Deixa o histórico um pouco mais largo para os dois jogadores caberem bem */
+.history-section {
+  max-width: 600px; 
 }
 
-.history-card {
-  max-width: 600px; /* Mais largo para caberem os jogadores lado a lado */
+.profile-card h2, .history-section h2 {
+  margin-top: 0;
+  margin-bottom: 25px;
 }
 
-/* Círculo verde do avatar */
+/* --- AVATAR --- */
 .avatar-circle {
   width: 80px;
   height: 80px;
   background: #00ff87;
-  font-size: 40px;
-  line-height: 80px;
   border-radius: 50%;
-  margin: 0 auto 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
 }
 
-/* Títulos das secções */
-.profile-header h2, .history-card h2 {
-  color: #fff;
-  margin: 0 0 25px 0;
-  font-size: 24px;
+.avatar-icon {
+  font-size: 40px;
 }
 
-/* Alinha as informações do perfil à esquerda */
-.profile-body {
+/* --- INPUTS E LABELS DO PERFIL --- */
+.input-group {
+  margin-bottom: 20px;
   text-align: left;
-  margin-bottom: 30px;
 }
 
-/* Margem entre cada bloco de informação */
-.info-group {
-  margin-bottom: 15px;
-}
-
-/* Etiqueta das informações */
-.info-group .info-label {
-  font-size: 12px;
+.input-group label {
   color: #888;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
   text-transform: uppercase;
   letter-spacing: 1px;
-  display: block; 
 }
 
-/* Valor das informações com caixa de fundo escuro */
-.info-value {
-  color: #fff;
-  font-size: 16px;
-  margin: 5px 0 0 0;
-  padding: 10px;
-  background: #2a2a2a;
-  border-radius: 6px;
-}
-
-/* --- ESTILOS DOS BOTÕES E INPUTS --- */
-.btn-logout {
+.display-box, .edit-input {
   width: 100%;
-  background: #ff4a4a;
-  color: white;
-  border: none;
   padding: 12px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.btn-logout:hover {
-  background: #e03b3b;
-}
-
-.edit-input, .edit-select {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
   background: #2a2a2a;
   border: 1px solid #444;
-  color: white;
   border-radius: 6px;
-  font-size: 16px;
+  color: white;
   box-sizing: border-box;
+  font-size: 16px;
 }
 
-.edit-input:focus, .edit-select:focus {
+.edit-input:focus {
   outline: none;
   border-color: #00ff87;
 }
 
-.btn-edit, .btn-save {
+/* --- BOTÕES DO PERFIL --- */
+.btn-green, .btn-red {
   width: 100%;
-  border: none;
   padding: 12px;
-  font-size: 16px;
-  font-weight: bold;
+  border: none;
   border-radius: 6px;
+  font-weight: bold;
+  font-size: 16px;
   cursor: pointer;
-  transition: background 0.2s;
-  margin-bottom: 10px;
+  margin-top: 10px;
+  transition: 0.2s;
 }
 
-.btn-edit {
-  background: #4CAF50;
-  color: white;
-}
-.btn-edit:hover { background: #45a049; }
+.btn-green { background: #4caf50; color: white; }
+.btn-green:hover { background: #45a049; }
 
-.btn-save {
-  background: #00ff87;
-  color: #000;
-}
-.btn-save:hover { background: #00cc6a; }
+.btn-red { background: #ff4c4c; color: white; }
+.btn-red:hover { background: #e60000; }
 
-
-/* --- HISTÓRICO DE COMPARAÇÕES --- */
-.comparisons-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+/* --- ESTILOS DO HISTÓRICO DE COMPARAÇÕES --- */
+.no-data {
+  color: #888;
 }
 
-/* Fundo da linha da comparação */
-.comp-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.comparison-card {
   background: #2a2a2a;
-  padding: 15px;
   border-radius: 8px;
-}
-
-/* Estilo das fotos e nomes */
-.player-mini {
+  padding: 15px;
+  margin-bottom: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 110px;
+  gap: 15px;
+  border: 1px solid #444;
+}
+
+.players-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+}
+
+.player-mini {
+  text-align: center;
   color: white;
+  width: 100px;
+}
+
+.player-mini p {
   font-size: 14px;
+  margin: 5px 0 0 0;
 }
 
 .player-mini img {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 5px;
   border: 2px solid #00ff87;
+  object-fit: cover;
 }
 
-.vs-text {
-  font-weight: bold;
+.vs-mini {
   color: #00ff87;
+  font-weight: bold;
+  font-size: 18px;
 }
 
-/* Botão de eliminar item da lista */
-.btn-delete {
-  background: none;
+.winner-row {
+  color: #ffd700;
+  font-size: 1.1rem;
+  background: rgba(255, 215, 0, 0.1);
+  padding: 5px 15px;
+  border-radius: 5px;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  justify-content: center;
+}
+
+.btn-arena {
+  background: #00ff87;
+  color: black;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.btn-arena:hover {
+  background: #00cc6a;
+}
+
+.btn-remove {
+  background: transparent;
+  color: #ff4c4c;
   border: none;
   cursor: pointer;
   font-size: 1.2rem;
-  transition: transform 0.2s;
+  transition: 0.2s;
 }
 
-.btn-delete:hover {
+.btn-remove:hover {
   transform: scale(1.2);
-}
-
-.empty-msg {
-  color: #888;
-  margin-top: 1rem;
 }

@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // Necessário para os inputs de texto
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { ComparisonService } from '../../services/comparison.service'; // Importar serviço de comparações
-import { ToastService } from '../../services/toast.service'; // Importar serviço de notificações
+import { ComparisonService } from '../../services/comparison.service'; // Serviço de comparações
+import { ToastService } from '../../services/toast.service'; // Serviço de notificações
 
 @Component({
   selector: 'app-profile',
@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
   isEditing = false;
   editUsername = '';
 
-  // Lista de funções disponíveis
+  // Lista de funções (roles) disponíveis
   funnyRoles = [
     'Olheiro Oficial',
     'Treinador de Bancada',
@@ -64,13 +64,13 @@ export class ProfileComponent implements OnInit {
     this.isEditing = false;
   }
 
-  // Limpa a sessão e volta ao login
+  // Limpa a sessão e volta ao ecrã de login
   logout() {
     this.authService.clearSession();
     this.router.navigate(['/login']);
   }
 
-  // Pede a lista de comparações à API
+  // Pede a lista de comparações históricas à API
   loadComparisons() {
     this.comparisonService.getComparisons().subscribe({
       next: (data) => this.comparisons = data,
@@ -87,5 +87,16 @@ export class ProfileComponent implements OnInit {
       },
       error: (err) => console.error('Erro ao apagar comparação', err)
     });
+  }
+
+  // Reabre uma comparação antiga na Arena
+  abrirComparacao(comp: any) {
+    // Reconstrói os dois jogadores com a informação guardada na BD
+    const p1 = { id: comp.player1Id, name: comp.player1Name, photo: comp.player1Photo };
+    const p2 = { id: comp.player2Id, name: comp.player2Name, photo: comp.player2Photo };
+    
+    // Carrega para a memória do serviço e redireciona para a Arena
+    this.comparisonService.loadComparisonFromProfile(p1, p2);
+    this.router.navigate(['/comparar']);
   }
 }

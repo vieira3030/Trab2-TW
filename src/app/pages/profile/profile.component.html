@@ -1,73 +1,77 @@
-<div class="profile-container">
+<div class="profile-page-container">
   
-  <!-- Secção 1: Dados do Perfil (Original) -->
   <div class="profile-card">
-    <div class="profile-header">
-      <div class="avatar-circle">⚽</div>
-      <h2>Perfil do Olheiro</h2>
+    <div class="avatar-circle">
+      <span class="avatar-icon">⚽</span>
     </div>
-    
-    <div class="profile-body">
-      <div class="info-group">
-        <span class="info-label">Nome de Utilizador</span>
-        @if (isEditing) {
-          <input type="text" [(ngModel)]="editUsername" class="edit-input">
-        } @else {
-          <p class="info-value">{{ username }}</p>
-        }
-      </div>
-      
-      <div class="info-group">
-        <span class="info-label">Função no Sistema</span>
-        @if (isEditing) {
-          <select [(ngModel)]="role" class="edit-select">
-            @for (r of funnyRoles; track r) {
-              <option [value]="r">{{ r }}</option>
-            }
-          </select>
-        } @else {
-          <p class="info-value">{{ role }}</p>
-        }
-      </div>
+    <h2>Perfil do Olheiro</h2>
+
+    <div class="input-group">
+      <label for="usernameInput">NOME DE UTILIZADOR</label>
+      @if (!isEditing) {
+        <div class="display-box">{{ username }}</div>
+      } @else {
+        <input id="usernameInput" type="text" [(ngModel)]="editUsername" class="edit-input">
+      }
     </div>
 
-    <div class="profile-footer">
-      @if (isEditing) {
-        <button type="button" (click)="saveProfile()" class="btn-save">Guardar Alterações</button>
+    <div class="input-group">
+    
+      <label for="roleInput">FUNÇÃO NO SISTEMA</label>
+      @if (!isEditing) {
+        <div class="display-box">{{ role }}</div>
       } @else {
-        <button type="button" (click)="startEdit()" class="btn-edit">Editar Perfil</button>
+        <select id="roleInput" [(ngModel)]="role" class="edit-input">
+          @for (r of funnyRoles; track r) {
+            <option [value]="r">{{ r }}</option>
+          }
+        </select>
       }
-      <button type="button" (click)="logout()" class="btn-logout">Terminar Sessão</button>
     </div>
+
+    @if (!isEditing) {
+      <button class="btn-green" (click)="startEdit()">Editar Perfil</button>
+    } @else {
+      <button class="btn-green" (click)="saveProfile()">Guardar Alterações</button>
+    }
+    <button class="btn-red" (click)="logout()">Terminar Sessão</button>
   </div>
 
-  <!-- Secção 2: Histórico de Comparações (Nova) -->
-  <div class="history-card">
+  <div class="history-section">
     <h2>O Meu Histórico 📊</h2>
     
-    <div class="comparisons-list">
-      <!-- Faz um loop pelas comparações -->
-      @for (comp of comparisons; track comp.id) {
-        <div class="comp-card">
-          <div class="player-mini">
-            <img [src]="comp.player1Photo" alt="{{ comp.player1Name }}">
-            <span>{{ comp.player1Name }}</span>
-          </div>
-          
-          <div class="vs-text">VS</div>
-          
-          <div class="player-mini">
-            <img [src]="comp.player2Photo" alt="{{ comp.player2Name }}">
-            <span>{{ comp.player2Name }}</span>
-          </div>
+    @if (comparisons.length === 0) {
+      <p class="no-data">Ainda não tens comparações guardadas.</p>
+    } @else {
+      <div class="comparison-list">
+        @for (comp of comparisons; track comp.id) {
+          <div class="comparison-card">
+            
+            <div class="players-row">
+              <div class="player-mini">
+                <img [src]="comp.player1Photo" alt="J1">
+                <p>{{ comp.player1Name }}</p>
+              </div>
+              <span class="vs-mini">VS</span>
+              <div class="player-mini">
+                <img [src]="comp.player2Photo" alt="J2">
+                <p>{{ comp.player2Name }}</p>
+              </div>
+            </div>
 
-          <button class="btn-delete" (click)="removeComparison(comp.id)">❌</button>
-        </div>
-      } @empty {
-        <!-- Aparece se a lista estiver vazia -->
-        <p class="empty-msg">Ainda não tens comparações guardadas no teu histórico.</p>
-      }
-    </div>
+            <div class="winner-row">
+              🏆 Vencedor: <strong>{{ comp.winner || 'Não definido' }}</strong>
+            </div>
+
+            <div class="action-buttons">
+              <button class="btn-arena" (click)="abrirComparacao(comp)">⚔️ Ver na Arena</button>
+              <button class="btn-remove" (click)="removeComparison(comp.id)">❌</button>
+            </div>
+
+          </div>
+        }
+      </div>
+    }
   </div>
 
 </div>

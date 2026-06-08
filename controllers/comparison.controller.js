@@ -10,6 +10,7 @@ exports.create = (req, res) => {
     player2Id: req.body.player2Id,
     player2Name: req.body.player2Name,
     player2Photo: req.body.player2Photo,
+    winner: req.body.winner, // <-- NOVA LINHA: Guarda o vencedor recebido do Angular
     userId: req.userId // Vem do mock de autenticação
   };
 
@@ -27,11 +28,11 @@ exports.findAll = (req, res) => {
 
 // Apagar uma comparação
 exports.delete = (req, res) => {
-  const id = req.params.id; // Neste caso apagamos pelo ID da comparação
+  const id = req.params.id; // Apaga pelo ID da comparação
 
   Comparison.destroy({ where: { id: id, userId: req.userId } })
     .then(num => {
-      if (num == 1) res.send({ message: "Comparação apagada!" });
+      if (num == 1) res.send({ message: "Comparação apagada com sucesso!" });
       else res.send({ message: "Comparação não encontrada." });
     })
     .catch(err => res.status(500).send({ message: err.message }));

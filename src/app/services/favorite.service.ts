@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 // Interface que define a estrutura do jogador favorito
 export interface FavoritePlayer {
+  id: number;
   playerId: number;
   playerName: string;
   playerPhoto: string;

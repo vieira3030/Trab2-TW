@@ -67,3 +67,142 @@
     flex-direction: column;
   }
 }
+
+/* Barras de pesquisa e botões */
+.search-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  justify-content: center;
+}
+
+.search-box input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #2a2a2a;
+  color: white;
+  width: 200px;
+}
+
+.search-box button {
+  padding: 10px 15px;
+  background-color: #00ff87;
+  color: black;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.search-box button:hover {
+  background-color: #00cc6a;
+}
+
+/* Retângulo tracejado quando está vazio */
+.placeholder {
+  width: 250px;
+  height: 350px;
+  border: 2px dashed #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.player-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- ESTILOS DO MODAL DE DUELO --- */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #1e1e1e;
+  padding: 30px;
+  border-radius: 12px;
+  border: 2px solid #00ff87;
+  text-align: center;
+  color: white;
+  min-width: 600px;
+}
+
+.modal-title {
+  margin-bottom: 30px;
+  color: #00ff87;
+}
+
+.stats-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.stat-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 40%;
+}
+
+.modal-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid white;
+  object-fit: cover;
+}
+
+.stat-column p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.vs-divider-modal {
+  font-size: 32px;
+  font-weight: bold;
+  color: #6b7280;
+}
+
+.btn-winner {
+  background: #ffd700;
+  color: #000;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: 0.2s;
+}
+
+.btn-winner:hover {
+  background: #ffea00;
+  transform: scale(1.05);
+}
+
+.btn-close {
+  background: #ff4c4c;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 30px;
+  font-weight: bold;
+}

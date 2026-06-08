@@ -1,18 +1,21 @@
 <div class="favorites-container">
   <h2>A Minha Lista de Jogadores ⭐</h2>
 
-  <div class="results">
-    @for (player of favoritePlayers; track player.playerId) {
-      <div class="favorite-card">
-        <img [src]="player.playerPhoto" alt="Foto de {{ player.playerName }}">
-        <h3>{{ player.playerName }}</h3>
+  <div class="favorites-grid">
+    @for (fav of favorites; track fav.id) {
+      <div class="favorite-item" (click)="card.openModal()" tabindex="0" (keydown.enter)="card.openModal()">
         
-        <button class="btn-remove" (click)="removePlayer(player.playerId)">❌ Remover</button>
-      </div>
-    } @empty {
-      <div class="empty-state">
-        <p>Ainda não tens jogadores guardados.</p>
-        <p>Vai à página de pesquisa para recrutares talento!</p>
+        <app-player-card #card [player]="{ 
+            id: fav.playerId, 
+            name: fav.playerName, 
+            photo: fav.playerPhoto
+          }">
+        </app-player-card>
+        
+        <button class="btn-remove" (click)="$event.stopPropagation(); removeFavorite(fav.id)">
+          ❌ Remover
+        </button>
+
       </div>
     }
   </div>

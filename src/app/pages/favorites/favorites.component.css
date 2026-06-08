@@ -1,72 +1,55 @@
-/* Contentor principal da página */
+/* --- CONTENTOR PRINCIPAL --- */
 .favorites-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2rem 40px;
   font-family: sans-serif;
+  min-height: 70vh;
 }
 
-/* Grelha de 4 colunas para os jogadores */
-.results {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+/* --- GRELHA DE FAVORITOS --- */
+.favorites-grid {
+  display: flex;
+  flex-wrap: wrap;
   gap: 30px;
+  justify-content: center;
   width: 100%;
   margin-top: 20px;
 }
 
-/* Estilo individual do cartão de favorito */
-.favorite-card {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  padding: 15px;
-  text-align: center;
+/* Controla o tamanho do cartão nesta página */
+.favorite-item {
+  width: 220px; 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  cursor: pointer; 
+  outline: none;
+  transition: box-shadow 0.2s ease-in-out;
 }
 
-.favorite-card img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 10px;
+/* Correção: Usar box-shadow em vez de transform para não estragar o modal fixed */
+.favorite-item:hover, .favorite-item:focus {
+  box-shadow: 0 8px 24px rgba(0, 255, 135, 0.2);
+  border-radius: 12px;
 }
 
-/* Botão vermelho para ação de apagar */
+/* --- BOTÃO DE REMOVER --- */
 .btn-remove {
-  margin-top: 15px;
-  padding: 10px;
+  width: 100%;
+  margin-top: -10px; 
+  padding: 12px;
   background-color: #dc2626; 
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 0 0 12px 12px; 
   cursor: pointer;
   font-weight: bold;
+  z-index: 10;
+  transition: background-color 0.2s;
 }
 
 .btn-remove:hover {
   background-color: #b91c1c;
-}
-
-/* Estilo para quando não há jogadores */
-.empty-state {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 40px;
-  background-color: #f9fafb;
-  border-radius: 8px;
-  color: #4b5563;
-}
-
-/* Responsividade para ecrãs menores */
-@media (max-width: 900px) {
-  .results { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 600px) {
-  .results { grid-template-columns: 1fr; }
 }
