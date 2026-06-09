@@ -1,87 +1,105 @@
-/* Remove limites de largura e estica o contentor de uma ponta à outra */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+/* Contentor geral da página */
 .search-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem 40px; /* Margem de 40px dos lados */
-  font-family: sans-serif;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.search-bar {
-  margin-bottom: 2rem;
-}
-
-button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
+  min-height: calc(100vh - 80px);
+  
+  /* Gradiente MAIS ESCURO que o da Home para destacar os cartões dos jogadores */
+  background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), 
+                    url('/assets/fundo-jogadores.jpg');
+  
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Faz com que a imagem fique parada quando desces a página (fica top!) */
+  
+  font-family: 'Inter', sans-serif;
   color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-}
-
-button:hover { background-color: #45a049; }
-
-/* Contentor dos cartões com CSS Grid */
-.results {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 colunas iguais */
-  gap: 40px; /* Espaço entre os cartões */
-  width: 100%;
-  margin-top: 30px;
-}
-
-/* Ajuste para 2 colunas em ecrãs mais pequenos ou telemóveis */
-@media (max-width: 900px) {
-  .results {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .results {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* --- NOVOS ESTILOS: ERRO E CARREGAMENTO --- */
-
-/* Estilos para a caixa de erro vermelha */
-.error-box {
-  background-color: #fee2e2;
-  color: #991b1b;
-  padding: 15px;
-  border-radius: 8px;
-  text-align: center;
-  margin: 20px 0;
-  border: 1px solid #f87171;
-  width: 100%;
-  max-width: 400px; /* Evita que a caixa fique demasiado larga */
-}
-
-/* Centrar o texto e a animação de loading */
-.loading-spinner {
+  padding: 40px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 30px 0;
 }
 
-/* Criar o círculo animado do spinner */
-.spinner {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #4CAF50; /* Cor verde igual à do botão */
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
+/* Cartão central de pesquisa com Efeito de Vidro (Glassmorphism) */
+.search-card {
+  /* Fundo escuro, mas com 65% de transparência (rgba) */
+  background-color: rgba(30, 41, 59, 0.65); 
+  margin-top: 22vh; /* Significa que vai ocupar 35% da altura do ecrã a partir do topo */
+  
+  /* A magia acontece aqui: desfoca o fundo que está atrás da caixa */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px); /* Garante que funciona no Safari */
+  
+  /* Borda muito fininha e branca quase invisível para dar o reflexo do vidro */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); /* Sombra mais espalhada para dar profundidade */
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
-/* Animação de rotação contínua */
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.search-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  font-weight: 700;
+}
+
+/* Alinhamento da barra e do botão */
+.search-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Campo de introdução de texto */
+.search-input {
+  flex: 1;
+  padding: 14px 20px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background-color: #0f172a;
+  color: white;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+/* Borda fica verde ao clicar no input */
+.search-input:focus {
+  border-color: #10b981;
+}
+
+/* Botão de pesquisa */
+.btn-search {
+  background-color: #10b981;
+  color: white;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-search:hover {
+  background-color: #059669;
+}
+
+/* Texto de instrução secundário */
+.info-text {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Zona dos resultados (grades dos futuros cartões) */
+.results-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 20px;
 }

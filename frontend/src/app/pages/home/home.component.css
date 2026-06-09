@@ -1,40 +1,86 @@
-/* home.component.css */
-.home-container {
+/* Importa a fonte Inter para o texto */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+.hero-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  height: 80vh;
-  text-align: center;
-  padding: 0 20px;
-}
-
-h1 {
-  font-size: 3rem;
-  color: #1a2a3a;
-  margin-bottom: 1rem;
-}
-
-p {
-  font-size: 1.2rem;
-  color: #666;
-  max-width: 600px;
-  margin-bottom: 2rem;
-}
-
-.btn-primary {
-  padding: 12px 30px;
-  background-color: #4CAF50;
+  align-items: center;
+  /* Garante que ocupa o ecrã todo menos a barra de topo */
+  min-height: calc(100vh - 80px); 
+  
+  /* Gradiente escuro sobreposto à imagem para dar leitura ao texto */
+  background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.75)), 
+                    url('/assets/fundo-estadio.jpg');
+  
+  /* Ajustes para a imagem cobrir o fundo sem distorcer */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  font-family: 'Inter', sans-serif;
   color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  text-decoration: none;
-  transition: 0.3s;
+  text-align: center;
+  padding: 20px;
 }
 
-.btn-primary:hover {
-  background-color: #45a049;
-  transform: translateY(-2px);
+.hero-content {
+  max-width: 800px;
+  animation: fadeIn 1s ease-in-out;
+  /* Sombra leve no bloco para destacar o texto do fundo */
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5); 
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+}
+
+/* Cor verde de destaque para o tema de futebol */
+.highlight {
+  color: #10b981; 
+  text-shadow: none;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #cbd5e1;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+/* Estilo do botão principal */
+.btn-comecar {
+  background-color: #10b981;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 15px 40px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+  text-shadow: none;
+}
+
+/* Efeito ao passar o rato: levanta ligeiramente e brilha mais */
+.btn-comecar:hover {
+  background-color: #059669;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.6);
+}
+
+/* Animação para o conteúdo surgir suavemente */
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
 }

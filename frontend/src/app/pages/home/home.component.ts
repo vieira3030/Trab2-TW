@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router'; // Necessário para o routerLink
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  standalone: true,
+  imports: [RouterModule], // Adiciona aqui
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+  styleUrl: './home.component.css'
 })
-export class HomeComponent {
-
-}
+export class HomeComponent {}

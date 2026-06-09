@@ -2,7 +2,7 @@ import {
   PlatformLocation,
   XhrFactory,
   parseCookieValue
-} from "./chunk-2JUTCAGO.js";
+} from "./chunk-AUPOMUIQ.js";
 import {
   APP_BOOTSTRAP_LISTENER,
   ApplicationRef,
@@ -38,7 +38,7 @@ import {
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
   ɵɵinject
-} from "./chunk-D3HJI2H5.js";
+} from "./chunk-3JBLDTJN.js";
 import {
   Observable,
   concatMap,
@@ -2103,7 +2103,7 @@ function shouldCacheRequest(req, options) {
     transferCache: requestOptions,
     method: requestMethod
   } = req;
-  if (!isCacheActive || requestOptions === false || requestMethod === "POST" && !globalOptions.includePostRequests && !requestOptions || requestMethod !== "POST" && !ALLOWED_METHODS.includes(requestMethod) || !globalOptions.includeRequestsWithAuthHeaders && hasAuthHeaders(req) || globalOptions.filter?.(req) === false) {
+  if (!isCacheActive || requestOptions === false || req.withCredentials || requestMethod === "POST" && !globalOptions.includePostRequests && !requestOptions || requestMethod !== "POST" && !ALLOWED_METHODS.includes(requestMethod) || !globalOptions.includeRequestsWithAuthHeaders && hasAuthHeaders(req) || globalOptions.filter?.(req) === false) {
     return false;
   }
   return true;
@@ -2201,7 +2201,7 @@ function transferCacheInterceptorFn(req, next) {
   return event$;
 }
 function hasAuthHeaders(req) {
-  return req.headers.has("authorization") || req.headers.has("proxy-authorization");
+  return req.headers.has("authorization") || req.headers.has("proxy-authorization") || req.headers.has("cookie");
 }
 function sortAndConcatParams(params) {
   return [...params.keys()].sort().map((k) => `${k}=${params.getAll(k)}`).join("&");
@@ -2499,4 +2499,4 @@ export {
   withHttpTransferCache,
   httpResource
 };
-//# sourceMappingURL=chunk-CPGDW6EO.js.map
+//# sourceMappingURL=chunk-QWXJHQQD.js.map

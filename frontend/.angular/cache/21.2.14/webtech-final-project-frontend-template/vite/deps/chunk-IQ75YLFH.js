@@ -1,17 +1,17 @@
 import {
   withHttpTransferCache
-} from "./chunk-CPGDW6EO.js";
+} from "./chunk-QWXJHQQD.js";
 import {
   CommonModule,
   PLATFORM_BROWSER_ID
-} from "./chunk-E46REYFI.js";
+} from "./chunk-MBRUK5Z3.js";
 import {
   DomAdapter,
   XhrFactory,
   getDOM,
   parseCookieValue,
   setRootDomAdapter
-} from "./chunk-2JUTCAGO.js";
+} from "./chunk-AUPOMUIQ.js";
 import {
   APP_ID,
   ApplicationModule,
@@ -72,7 +72,7 @@ import {
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
   ɵɵinject
-} from "./chunk-D3HJI2H5.js";
+} from "./chunk-3JBLDTJN.js";
 import {
   __async,
   __spreadValues
@@ -1155,12 +1155,13 @@ var Meta = class _Meta {
   }
   getTag(attrSelector) {
     if (!attrSelector) return null;
-    return this._doc.querySelector(`meta[${attrSelector}]`) || null;
+    const meta = this._doc.querySelector(`meta[${attrSelector}]`);
+    return meta?.nodeName.toLowerCase() === "meta" ? meta : null;
   }
   getTags(attrSelector) {
     if (!attrSelector) return [];
     const list = this._doc.querySelectorAll(`meta[${attrSelector}]`);
-    return list ? [].slice.call(list) : [];
+    return list ? [].slice.call(list).filter((elem) => elem.nodeName.toLowerCase() === "meta") : [];
   }
   updateTag(tag, selector) {
     if (!tag) return null;
@@ -1197,7 +1198,10 @@ var Meta = class _Meta {
   }
   _parseSelector(tag) {
     const attr = tag.name ? "name" : "property";
-    return `${attr}="${tag[attr]}"`;
+    return `${attr}=${this._escapeSelectorValue(String(tag[attr]))}`;
+  }
+  _escapeSelectorValue(value) {
+    return `"${value.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`;
   }
   _containsAttributes(tag, elem) {
     return Object.keys(tag).every((key) => elem.getAttribute(this._getMetaKeyMap(key)) === tag[key]);
@@ -1712,7 +1716,7 @@ function provideClientHydration(...features) {
   }
   return makeEnvironmentProviders([typeof ngDevMode !== "undefined" && ngDevMode ? provideEnabledBlockingInitialNavigationDetector() : [], typeof ngDevMode !== "undefined" && ngDevMode ? provideStabilityDebugging() : [], withDomHydration(), featuresKind.has(HydrationFeatureKind.NoHttpTransferCache) || hasHttpTransferCacheOptions ? [] : withHttpTransferCache({}), providers]);
 }
-var VERSION = new Version("21.2.12");
+var VERSION = new Version("21.2.16");
 
 export {
   EventManagerPlugin,
@@ -1751,4 +1755,4 @@ export {
   provideClientHydration,
   VERSION
 };
-//# sourceMappingURL=chunk-PJ5XVYQX.js.map
+//# sourceMappingURL=chunk-IQ75YLFH.js.map

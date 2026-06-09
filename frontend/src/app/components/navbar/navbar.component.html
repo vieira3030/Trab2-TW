@@ -1,16 +1,15 @@
 <nav class="navbar">
-  <div class="logo">⚽ Olheiro Pro</div>
+  
+  <<div class="logo" routerLink="/">
+  ⚽ Olheiro <span>Pro</span>
+</div>
+
   <ul class="nav-links">
-    <li><a routerLink="/">Início</a></li>
-    <li><a routerLink="/search">Pesquisar Clubes</a></li>
-    
-    @if (isLoggedIn) {
-      <li><a routerLink="/favorites">Meus Favoritos</a></li>
-      <li><a routerLink="/comparar">Comparar</a></li>
-      <li><a routerLink="/profile">O Meu Perfil</a></li>
-    } @else {
-      <li><a routerLink="/login">Login</a></li>
-      <li><a routerLink="/register">Registo</a></li>
-    }
+    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Início</a></li>
+    <li><a routerLink="/search" routerLinkActive="active">Pesquisar Clubes</a></li>
+    <li><a routerLink="/favorites" routerLinkActive="active">Meus Favoritos</a></li>
+    <li><a routerLink="/comparar" routerLinkActive="active">Comparar</a></li>
+    <li><a routerLink="/profile" routerLinkActive="active">O Meu Perfil</a></li>
   </ul>
+
 </nav>

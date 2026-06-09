@@ -1,6 +1,6 @@
 import {
   PlatformLocation
-} from "./chunk-2JUTCAGO.js";
+} from "./chunk-AUPOMUIQ.js";
 import {
   ApplicationRef,
   Attribute,
@@ -62,7 +62,7 @@ import {
   ɵɵinject,
   ɵɵinjectAttribute,
   ɵɵstyleProp
-} from "./chunk-D3HJI2H5.js";
+} from "./chunk-3JBLDTJN.js";
 import {
   Subject
 } from "./chunk-RSS3ODKE.js";
@@ -366,7 +366,7 @@ function _stripBasePath(basePath, url) {
   return url;
 }
 function _stripIndexHtml(url) {
-  return url.replace(/\/index.html$/, "");
+  return url.replace(/\/index\.html$/, "");
 }
 function _stripOrigin(baseHref) {
   const isAbsoluteUrl2 = new RegExp("^(https?:)?//").test(baseHref);
@@ -1392,6 +1392,10 @@ function formatNumberToLocaleString(value, pattern, locale, groupSymbol, decimal
         maxFraction = parseIntAutoRadix(maxFractionPart);
       } else if (minFractionPart != null && minFraction > maxFraction) {
         maxFraction = minFraction;
+      }
+      const MAX_ALLOWED_DIGITS = 100;
+      if (minInt > MAX_ALLOWED_DIGITS || minFraction > MAX_ALLOWED_DIGITS || maxFraction > MAX_ALLOWED_DIGITS) {
+        throw new RuntimeError(2306, ngDevMode && `${digitsInfo} is not a valid digit info. Exceeded maximum limits of ${MAX_ALLOWED_DIGITS} digits.`);
       }
     }
     roundNumber(parsedNumber, minFraction, maxFraction);
@@ -3299,7 +3303,7 @@ function isPlatformBrowser(platformId) {
 function isPlatformServer(platformId) {
   return platformId === PLATFORM_SERVER_ID;
 }
-var VERSION = new Version("21.2.12");
+var VERSION = new Version("21.2.16");
 var ViewportScroller = class _ViewportScroller {
   static ɵprov = ɵɵdefineInjectable({
     token: _ViewportScroller,
@@ -4130,13 +4134,13 @@ var NgOptimizedImage = class _NgOptimizedImage {
       placeholderResolution
     } = this.config;
     if (placeholderInput === true) {
-      return `url(${this.callImageLoader({
+      return `url("${escapeCssUrl(this.callImageLoader({
         src: this.ngSrc,
         width: placeholderResolution,
         isPlaceholder: true
-      })})`;
+      }))}")`;
     } else if (typeof placeholderInput === "string") {
-      return `url(${placeholderInput})`;
+      return `url("${escapeCssUrl(placeholderInput)}")`;
     }
     return null;
   }
@@ -4571,6 +4575,9 @@ function unwrapSafeUrl(value) {
   }
   return unwrapSafeValue(value);
 }
+function escapeCssUrl(input) {
+  return input.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+}
 function booleanOrUrlAttribute(value) {
   if (typeof value === "string" && value !== "true" && value !== "false" && value !== "") {
     return value;
@@ -4670,4 +4677,4 @@ export {
   PRECONNECT_CHECK_BLOCKLIST,
   NgOptimizedImage
 };
-//# sourceMappingURL=chunk-E46REYFI.js.map
+//# sourceMappingURL=chunk-MBRUK5Z3.js.map

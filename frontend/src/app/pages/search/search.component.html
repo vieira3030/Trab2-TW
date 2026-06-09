@@ -1,31 +1,19 @@
 <div class="search-container">
-  <h2>Pesquisar Plantel de Equipas</h2>
-  
-  <div class="search-bar">
-    <input type="text" [(ngModel)]="teamName" placeholder="Nome da equipa (ex: Arsenal)">
-    <button (click)="onSearch()">Carregar Plantel</button>
+  <div class="search-card">
+    <h2>Pesquisar Plantel de Equipas</h2>
+    
+    <div class="search-group">
+      <input 
+        type="text" 
+        placeholder="Nome da equipa (ex: Arsenal)..." 
+        class="search-input"
+      >
+      <button class="btn-search">Carregar Plantel</button>
+    </div>
+    
+    <p class="info-text">Escreve o nome da equipa e carrega no botão para ver os jogadores.</p>
   </div>
 
-  @if (errorMessage) {
-    <div class="error-box">
-      <p>⚠️ {{ errorMessage }}</p>
+  <div class="results-container">
     </div>
-  }
-
-  @if (isLoading) {
-    <div class="loading-spinner">
-      <div class="spinner"></div>
-      <p>A carregar plantel...</p>
-    </div>
-  }
-
-  <div class="results">
-    @for (player of players; track player.id) {
-      <app-player-card [player]="player"></app-player-card>
-    } @empty {
-      @if (!isLoading && !errorMessage) {
-        <p>Escreve o nome da equipa e carrega no botão para ver os jogadores.</p>
-      }
-    }
-  </div>
 </div>

@@ -1,196 +1,131 @@
-/* --- ALINHAMENTO GERAL DA PÁGINA --- */
-.profile-page-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 30px;
+/* Contentor principal ajustado para empilhar os cartões */
+.profile-container {
+  min-height: calc(100vh - 80px);
+  background-color: #0f172a; 
   padding: 40px 20px;
-  min-height: 70vh;
-  font-family: sans-serif;
-}
-
-/* --- ESTILOS DOS CARTÕES PRINCIPAIS --- */
-.profile-card, .history-section {
-  background: #1e1e1e;
-  border: 1px solid #333;
-  border-radius: 12px;
-  padding: 30px;
-  width: 100%;
-  max-width: 500px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  text-align: center;
+  display: flex;
+  flex-direction: column; /* Coloca um cartão debaixo do outro */
+  align-items: center;
+  gap: 30px; /* Espaço entre o Perfil e o Histórico */
+  font-family: 'Inter', sans-serif;
   color: white;
 }
 
-/* Deixa o histórico um pouco mais largo para os dois jogadores caberem bem */
-.history-section {
-  max-width: 600px; 
+/* Estilo base para ambos os cartões */
+.profile-card, .history-card {
+  background-color: #1e293b; 
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 40px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  animation: fadeIn 0.5s ease;
 }
 
-.profile-card h2, .history-section h2 {
-  margin-top: 0;
-  margin-bottom: 25px;
-}
-
-/* --- AVATAR --- */
-.avatar-circle {
-  width: 80px;
-  height: 80px;
-  background: #00ff87;
+/* Círculo do Avatar */
+.avatar {
+  font-size: 3rem;
+  background-color: #0f172a;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 20px auto;
+  border: 3px solid #10b981;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
 }
 
-.avatar-icon {
-  font-size: 40px;
+h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 30px;
 }
 
-/* --- INPUTS E LABELS DO PERFIL --- */
-.input-group {
-  margin-bottom: 20px;
+/* Campos de texto */
+.detail-group {
   text-align: left;
+  margin-bottom: 20px;
 }
 
-.input-group label {
-  color: #888;
-  font-size: 0.8rem;
-  font-weight: bold;
-  margin-bottom: 5px;
-  display: block;
+.detail-group label {
+  color: #94a3b8;
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 1px;
+  margin-bottom: 8px;
+  display: block;
 }
 
-.display-box, .edit-input {
+.detail-input {
   width: 100%;
-  padding: 12px;
-  background: #2a2a2a;
-  border: 1px solid #444;
-  border-radius: 6px;
+  background-color: #0f172a;
+  border: 1px solid #334155;
   color: white;
-  box-sizing: border-box;
-  font-size: 16px;
-}
-
-.edit-input:focus {
-  outline: none;
-  border-color: #00ff87;
-}
-
-/* --- BOTÕES DO PERFIL --- */
-.btn-green, .btn-red {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: 0.2s;
-}
-
-.btn-green { background: #4caf50; color: white; }
-.btn-green:hover { background: #45a049; }
-
-.btn-red { background: #ff4c4c; color: white; }
-.btn-red:hover { background: #e60000; }
-
-/* --- ESTILOS DO HISTÓRICO DE COMPARAÇÕES --- */
-.no-data {
-  color: #888;
-}
-
-.comparison-card {
-  background: #2a2a2a;
+  padding: 12px 15px;
   border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 15px;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  box-sizing: border-box; /* Garante que o input não sai do cartão */
+}
+
+/* Zona dos botões */
+.profile-actions {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  border: 1px solid #444;
+  gap: 15px; /* Espaço entre os dois botões */
+  margin-top: 30px;
 }
 
-.players-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
+.btn-edit, .btn-logout {
   width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
 }
 
-.player-mini {
-  text-align: center;
+.btn-edit {
+  background-color: #10b981;
   color: white;
-  width: 100px;
 }
 
-.player-mini p {
-  font-size: 14px;
-  margin: 5px 0 0 0;
+.btn-edit:hover {
+  background-color: #059669;
+  transform: translateY(-2px);
 }
 
-.player-mini img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: 2px solid #00ff87;
-  object-fit: cover;
+.btn-logout {
+  background-color: #ef4444;
+  color: white;
 }
 
-.vs-mini {
-  color: #00ff87;
-  font-weight: bold;
-  font-size: 18px;
+.btn-logout:hover {
+  background-color: #dc2626;
+  transform: translateY(-2px);
 }
 
-.winner-row {
-  color: #ffd700;
-  font-size: 1.1rem;
-  background: rgba(255, 215, 0, 0.1);
-  padding: 5px 15px;
-  border-radius: 5px;
-  width: 100%;
-  text-align: center;
-  box-sizing: border-box;
+/* Textos do cartão de Histórico */
+.history-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  font-weight: 700;
 }
 
-.action-buttons {
-  display: flex;
-  gap: 15px;
-  width: 100%;
-  justify-content: center;
+.history-card p {
+  color: #94a3b8;
+  font-size: 1rem;
+  margin: 0;
 }
 
-.btn-arena {
-  background: #00ff87;
-  color: black;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.2s;
-}
-
-.btn-arena:hover {
-  background: #00cc6a;
-}
-
-.btn-remove {
-  background: transparent;
-  color: #ff4c4c;
-  border: none;
-  cursor: pointer;
-  font-size: 1.2rem;
-  transition: 0.2s;
-}
-
-.btn-remove:hover {
-  transform: scale(1.2);
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
 }

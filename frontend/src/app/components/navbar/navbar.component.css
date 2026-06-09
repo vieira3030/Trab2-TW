@@ -1,32 +1,54 @@
-/* navbar.component.css */
+/* Importa a mesma fonte do resto do site */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+
+/* Estrutura da barra: alinhamento horizontal e fundo escuro */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 5%;
-  background-color: #1a2a3a; /* Azul escuro/scout */
-  color: white;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 0 50px;
+  height: 80px;
+  background-color: #0f172a; /* Cor de fundo igual à do site */
+  border-bottom: 1px solid #1e293b; /* Linha divisória subtil na base */
+  font-family: 'Inter', sans-serif;
 }
 
+/* Estilo do logótipo: texto branco e negrito */
 .logo {
   font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.nav-links {
-  display: flex;
-  list-style: none;
-  gap: 20px;
-}
-
-.nav-links a {
+  font-weight: 900;
   color: white;
-  text-decoration: none;
-  font-weight: 500;
-  transition: 0.3s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.nav-links a:hover {
-  color: #4CAF50; /* Verde relvado */
+/* Dá o tom verde de destaque apenas ao texto "Olheiro Pro" */
+.logo span {
+  color: #10b981;
+}
+
+/* Remove os pontos da lista e alinha os links na horizontal */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilo dos links: texto cinzento claro e sem sublinhado */
+.nav-links a {
+  text-decoration: none;
+  color: #cbd5e1;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.3s ease; /* Transição suave de cor */
+}
+
+/* Efeito ao passar o rato ou quando a página está ativa */
+.nav-links a:hover, 
+.nav-links a.active {
+  color: #10b981; /* O texto fica verde brilhante */
 }
