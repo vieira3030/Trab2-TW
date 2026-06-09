@@ -13,8 +13,8 @@ export interface FavoritePlayer {
   providedIn: 'root'
 })
 export class FavoriteService {
-  // O endereço da API do vosso backend
-  private apiUrl = 'http://localhost:8080/api/favorites';
+  // URL atualizada para o backend de produção no Render
+  private apiUrl = 'https://trab2-tw.onrender.com/api/favorites';
   
   private http = inject(HttpClient);
 

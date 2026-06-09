@@ -5,7 +5,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ComparisonService {
-  private apiUrl = 'http://localhost:8080/api/comparisons';
+  // URL atualizada para o backend de produção no Render
+  private apiUrl = 'https://trab2-tw.onrender.com/api/comparisons';
   private http = inject(HttpClient);
 
   // --- MEMÓRIA DA ARENA ---
@@ -48,7 +49,7 @@ export class ComparisonService {
     return this.http.post(this.apiUrl, body);
   }
 
-   
+    
   getComparisons() {
     return this.http.get<unknown[]>(this.apiUrl);
   }
