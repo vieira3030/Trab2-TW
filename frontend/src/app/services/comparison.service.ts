@@ -11,10 +11,10 @@ export class ComparisonService {
   // --- FUNÇÃO DE AUTENTICAÇÃO ---
   // Cria o cabeçalho com o token do utilizador logado
   private getAuthHeaders() {
-    const token = localStorage.getItem('token'); // Ajusta 'token' se usares outro nome no login
+    const token = localStorage.getItem('token');
     return {
       headers: new HttpHeaders({
-        'Authorization': `Bearer ${token}`
+        'x-access-token': token ? token : '' // Envia apenas o token na chave correta
       })
     };
   }
