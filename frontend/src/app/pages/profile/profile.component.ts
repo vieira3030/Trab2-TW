@@ -1,11 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // Necessário para os inputs de texto
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { ComparisonService } from '../../services/comparison.service'; // Serviço de comparações
-import { ToastService } from '../../services/toast.service'; // Serviço de notificações
+import { AuthService } from '../../services/auth.service'; // Confirma se o caminho está correto!
 
 @Component({
   selector: 'app-profile',
@@ -15,88 +12,54 @@ import { ToastService } from '../../services/toast.service'; // Serviço de noti
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit {
-  private router = inject(Router);
+  // Variáveis vazias que vão ser preenchidas com dados reais
+  username: string = '';
+  role: string = '';
+  isEditing: boolean = false;
+  history: any[] = [];
+
+  // Injetar os serviços necessários
   private authService = inject(AuthService);
-  private comparisonService = inject(ComparisonService);
-  private toastService = inject(ToastService);
-
-  // Dados do utilizador
-  username = '';
-  role = ''; 
-
-  // Variáveis para controlar o modo de edição
-  isEditing = false;
-  editUsername = '';
-
-  // Lista de funções (roles) disponíveis
-  funnyRoles = [
-    'Olheiro Oficial',
-    'Treinador de Bancada',
-    'Analista de Sofá',
-    'Mister das Táticas',
-    'Especialista em Cargas de Ombro',
-    'Caça-Talentos (com miopia)'
-  ];
-
-  // Array que guarda as comparações recebidas da API
-  comparisons: any[] = [];
+  private router = inject(Router);
 
   ngOnInit() {
-    // Carrega os dados guardados do perfil
-    this.username = localStorage.getItem('username') || 'Utilizador';
-    this.role = localStorage.getItem('role') || 'Olheiro Oficial';
+    // 1. CARREGAR PERFIL: Vai buscar à memória (ou base de dados)
+    this.username = localStorage.getItem('olheiro_username') || 'vieira3030';
+    this.role = localStorage.getItem('olheiro_role') || 'Caça-Talentos (com miopia)';
+
+    // 2. CARREGAR HISTÓRICO: Vai procurar as comparações reais que guardaste noutra página
+    const historicoGuardado = localStorage.getItem('olheiro_historico');
+    if (historicoGuardado) {
+      this.history = JSON.parse(historicoGuardado); // Carrega o que lá estiver
+    } else {
+      this.history = []; // Fica vazio e mostra a mensagem "Ainda não tens comparações"
+    }
+  }
+
+  // 3. EDITAR E GUARDAR PERFIL
+  toggleEdit() {
+    this.isEditing = !this.isEditing; // Alterna entre bloquear e desbloquear
     
-    // Carrega o histórico ao abrir a página
-    this.loadComparisons();
+    if (!this.isEditing) {
+      // Quando clicas em "Guardar Alterações" (isEditing passa a false)
+      console.log('A guardar novos dados:', this.username, this.role);
+      
+      // Guarda na memória do browser
+      localStorage.setItem('olheiro_username', this.username);
+      localStorage.setItem('olheiro_role', this.role);
+      
+      // NOTA: Se tiveres backend, deverias chamar aqui algo como:
+      // this.authService.updateUser(this.username, this.role).subscribe(...);
+    }
   }
 
-  // Ativa os campos de texto e prepara o nome atual
-  startEdit() {
-    this.isEditing = true;
-    this.editUsername = this.username;
-  }
-
-  // Guarda as alterações na memória do browser e fecha a edição
-  saveProfile() {
-    this.username = this.editUsername;
-    localStorage.setItem('username', this.username);
-    localStorage.setItem('role', this.role);
-    this.isEditing = false;
-  }
-
-  // Limpa a sessão e volta ao ecrã de login
+  // 4. TERMINAR SESSÃO
   logout() {
-    this.authService.clearSession();
-    this.router.navigate(['/login']);
-  }
-
-  // Pede a lista de comparações históricas à API
-  loadComparisons() {
-    this.comparisonService.getComparisons().subscribe({
-      next: (data) => this.comparisons = data,
-      error: (err) => console.error('Erro ao carregar comparações', err)
-    });
-  }
-
-  // Remove comparação na API e atualiza a lista visualmente
-  removeComparison(id: number) {
-    this.comparisonService.deleteComparison(id).subscribe({
-      next: () => {
-        this.comparisons = this.comparisons.filter(c => c.id !== id);
-        this.toastService.show('Comparação apagada com sucesso! 🗑️');
-      },
-      error: (err) => console.error('Erro ao apagar comparação', err)
-    });
-  }
-
-  // Reabre uma comparação antiga na Arena
-  abrirComparacao(comp: any) {
-    // Reconstrói os dois jogadores com a informação guardada na BD
-    const p1 = { id: comp.player1Id, name: comp.player1Name, photo: comp.player1Photo };
-    const p2 = { id: comp.player2Id, name: comp.player2Name, photo: comp.player2Photo };
+    console.log('A terminar sessão e a limpar dados...');
+    // Se o teu authService tiver função de logout, chama-a aqui:
+    // this.authService.logout(); 
     
-    // Carrega para a memória do serviço e redireciona para a Arena
-    this.comparisonService.loadComparisonFromProfile(p1, p2);
-    this.router.navigate(['/comparar']);
+    // Redireciona o utilizador de volta para a página inicial
+    this.router.navigate(['/']); 
   }
 }

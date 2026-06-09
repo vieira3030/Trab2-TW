@@ -1,16 +1,14 @@
-
-
-/* Contentor geral da página */
 .search-container {
   min-height: calc(100vh - 80px);
   
-  /* Gradiente MAIS ESCURO que o da Home para destacar os cartões dos jogadores */
+  /* Caminho da imagem corrigido para o deploy */
   background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), 
-                    url('/assets/fundo-jogadores.jpg');
+                    url('../../../assets/fundo-jogadores.jpg');
   
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed; /* Faz com que a imagem fique parada quando desces a página (fica top!) */
+  background-size: 100% auto; 
+  background-position: top center; 
+  background-repeat: no-repeat; 
+  background-attachment: fixed;
   
   font-family: 'Inter', sans-serif;
   color: white;
@@ -20,22 +18,15 @@
   align-items: center;
 }
 
-/* Cartão central de pesquisa com Efeito de Vidro (Glassmorphism) */
 .search-card {
-  /* Fundo escuro, mas com 65% de transparência (rgba) */
+  margin-top: 22vh; 
   background-color: rgba(30, 41, 59, 0.65); 
-  margin-top: 22vh; /* Significa que vai ocupar 35% da altura do ecrã a partir do topo */
-  
-  /* A magia acontece aqui: desfoca o fundo que está atrás da caixa */
   backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px); /* Garante que funciona no Safari */
-  
-  /* Borda muito fininha e branca quase invisível para dar o reflexo do vidro */
+  -webkit-backdrop-filter: blur(8px); 
   border: 1px solid rgba(255, 255, 255, 0.08);
-
   padding: 40px;
   border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); /* Sombra mais espalhada para dar profundidade */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   max-width: 600px;
   width: 100%;
   text-align: center;
@@ -48,14 +39,12 @@
   font-weight: 700;
 }
 
-/* Alinhamento da barra e do botão */
 .search-group {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
 }
 
-/* Campo de introdução de texto */
 .search-input {
   flex: 1;
   padding: 14px 20px;
@@ -68,12 +57,10 @@
   transition: border-color 0.3s;
 }
 
-/* Borda fica verde ao clicar no input */
 .search-input:focus {
   border-color: #10b981;
 }
 
-/* Botão de pesquisa */
 .btn-search {
   background-color: #10b981;
   color: white;
@@ -90,14 +77,12 @@
   background-color: #059669;
 }
 
-/* Texto de instrução secundário */
 .info-text {
   color: #94a3b8;
   font-size: 0.95rem;
   margin: 0;
 }
 
-/* Zona dos resultados (grades dos futuros cartões) */
 .results-container {
   width: 100%;
   max-width: 1200px;

@@ -22,13 +22,13 @@ export class ComparisonComponent implements OnInit {
   private toastService = inject(ToastService);
   private footballService = inject(FootballService);
 
-  // Lê a memória ao abrir a página
+  // Lê os jogadores em memória ao iniciar o componente
   ngOnInit() {
     this.player1 = this.comparisonService.player1Temp;
     this.player2 = this.comparisonService.player2Temp;
   }
 
-  // Abre o duelo e pede estatísticas completas
+  // Verifica se existem 2 jogadores, abre a janela e pede estatísticas à API
   openDuelo() {
     if (!this.player1 || !this.player2) {
       this.toastService.show('Precisas de 2 jogadores para o duelo! ⚠️');
@@ -39,11 +39,12 @@ export class ComparisonComponent implements OnInit {
     this.loadPlayerStats(this.player2);
   }
 
+  // Esconde a janela de duelo
   closeModal() {
     this.showModal = false;
   }
 
-  // Pede dados detalhados à API
+  // Pede dados estatísticos detalhados ao backend se ainda não existirem
   loadPlayerStats(player: PlayerData) {
     if (player.id && player.goals === undefined) {
       this.footballService.getPlayerDetails(player.id).subscribe({
@@ -52,12 +53,12 @@ export class ComparisonComponent implements OnInit {
           const statsInfo = data.response[0]?.statistics[0];
           
           if (playerInfo && statsInfo) {
-            // Estatísticas Base
+            // Preenche estatísticas base
             player.goals = statsInfo.goals.total || 0;
             player.assists = statsInfo.goals.assists || 0;
             player.rating = statsInfo.games.rating ? String(statsInfo.games.rating).substring(0, 4) : 'N/A';
             
-            // Novas Estatísticas Adicionadas
+            // Preenche novas estatísticas adicionadas
             player.weight = playerInfo.weight || 'N/A';
             player.height = playerInfo.height || 'N/A';
             player.minutes = statsInfo.games.minutes || 0;
@@ -70,9 +71,8 @@ export class ComparisonComponent implements OnInit {
     }
   }
 
-  // Regista o vencedor, guarda a comparação e limpa o ecrã
+  // Envia o vencedor para o serviço, mostra notificação e limpa a arena
   chooseWinner(winner: PlayerData) {
-    // Passa o nome do vencedor para o serviço
     this.comparisonService.saveComparison(this.player1, this.player2, winner.name).subscribe({
       next: () => {
         this.toastService.show(`🏆 ${winner.name} venceu! Guardado no Perfil.`);
@@ -81,7 +81,10 @@ export class ComparisonComponent implements OnInit {
         this.player2 = null;
         this.closeModal();
       },
-      error: (err: any) => console.error('Erro ao guardar:', err)
+      error: (err: any) => {
+        console.error('Erro ao guardar:', err);
+        this.toastService.show('Erro ao guardar! Verifica a tua sessão.');
+      }
     });
   }
 }

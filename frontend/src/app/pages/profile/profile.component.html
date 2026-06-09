@@ -1,5 +1,4 @@
 <div class="profile-container">
-  
   <div class="profile-card">
     <div class="profile-header">
       <div class="avatar">⚽</div>
@@ -9,24 +8,41 @@
     <div class="profile-details">
       <div class="detail-group">
         <label>Nome de Utilizador</label>
-        <input type="text" class="detail-input" value="vieira3030" readonly>
+        <input type="text" class="detail-input" [(ngModel)]="username" [readonly]="!isEditing">
       </div>
       
       <div class="detail-group">
         <label>Função no Sistema</label>
-        <input type="text" class="detail-input" value="Caça-Talentos (com miopia)" readonly>
+        <input *ngIf="!isEditing" type="text" class="detail-input" [value]="role" readonly>
+        
+        <select *ngIf="isEditing" class="detail-input" [(ngModel)]="role">
+  <option value="Caça-Talentos (com miopia)">Caça-Talentos (com miopia)</option>
+  <option value="Treinador de Bancada (Mestre dos palpites)">Treinador de Bancada (Mestre dos palpites)</option>
+  <option value="Olheiro de Sofá (Scouting no YouTube)">Olheiro de Sofá (Scouting no YouTube)</option>
+  <option value="Tático do FM (Venceu a Champions virtual)">Tático do FM (Venceu a Champions virtual)</option>
+  <option value="Diretor Desportivo (Orçamento de 5€)">Diretor Desportivo (Orçamento de 5€)</option>
+  <option value="Presidente (Despede o treinador ao intervalo)">Presidente (Despede o treinador ao intervalo)</option>
+</select>
       </div>
     </div>
 
     <div class="profile-actions">
-      <button class="btn-edit">Editar Perfil</button>
-      <button class="btn-logout">Terminar Sessão</button>
+      <button class="btn-edit" (click)="toggleEdit()">
+        {{ isEditing ? 'Guardar Alterações' : 'Editar Perfil' }}
+      </button>
+      <button class="btn-logout" (click)="logout()">Terminar Sessão</button>
     </div>
   </div>
 
   <div class="history-card">
     <h3>O Meu Histórico 📊</h3>
-    <p>Ainda não tens comparações guardadas.</p>
+    
+    <p *ngIf="!history || history.length === 0">Ainda não tens comparações guardadas.</p>
+    
+    <ul *ngIf="history && history.length > 0" style="list-style: none; padding: 0; text-align: left; color: #cbd5e1;">
+      <li *ngFor="let item of history" style="padding: 10px; border-bottom: 1px solid #334155;">
+        {{ item.player1 }} vs {{ item.player2 }}
+      </li>
+    </ul>
   </div>
-
 </div>

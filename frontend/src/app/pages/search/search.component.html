@@ -7,13 +7,18 @@
         type="text" 
         placeholder="Nome da equipa (ex: Arsenal)..." 
         class="search-input"
+        [(ngModel)]="teamName"
       >
-      <button class="btn-search">Carregar Plantel</button>
+      <button class="btn-search" (click)="onSearch()">Carregar Plantel</button>
     </div>
     
     <p class="info-text">Escreve o nome da equipa e carrega no botão para ver os jogadores.</p>
+    
+    <p *ngIf="errorMessage" style="color: #ef4444; margin-top: 15px;">{{ errorMessage }}</p>
+    <p *ngIf="isLoading" style="color: #10b981; margin-top: 15px;">A pesquisar na base de dados...</p>
   </div>
 
-  <div class="results-container">
-    </div>
+  <div class="results-container" *ngIf="!isLoading && players.length > 0">
+    <app-player-card *ngFor="let player of players" [player]="player"></app-player-card>
+  </div>
 </div>

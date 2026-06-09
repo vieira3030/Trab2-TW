@@ -1,18 +1,13 @@
-/* Importa a fonte Inter para o texto */
-
-
 .hero-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Garante que ocupa o ecrã todo menos a barra de topo */
   min-height: calc(100vh - 80px); 
   
-  /* Gradiente escuro sobreposto à imagem para dar leitura ao texto */
-  background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.75)), 
-                    url('/assets/fundo-estadio.jpg');
+  /* Caminho da imagem corrigido para o deploy */
+ background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.75)), 
+                    url('../../../assets/fundo-estadio.jpg');
   
-  /* Ajustes para a imagem cobrir o fundo sem distorcer */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -26,7 +21,6 @@
 .hero-content {
   max-width: 800px;
   animation: fadeIn 1s ease-in-out;
-  /* Sombra leve no bloco para destacar o texto do fundo */
   text-shadow: 0 2px 10px rgba(0,0,0,0.5); 
 }
 
@@ -37,7 +31,6 @@
   letter-spacing: -1px;
 }
 
-/* Cor verde de destaque para o tema de futebol */
 .highlight {
   color: #10b981; 
   text-shadow: none;
@@ -51,7 +44,6 @@
   line-height: 1.6;
 }
 
-/* Estilo do botão principal */
 .btn-comecar {
   background-color: #10b981;
   color: white;
@@ -63,24 +55,15 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
-  text-shadow: none;
 }
 
-/* Efeito ao passar o rato: levanta ligeiramente e brilha mais */
 .btn-comecar:hover {
   background-color: #059669;
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(16, 185, 129, 0.6);
 }
 
-/* Animação para o conteúdo surgir suavemente */
 @keyframes fadeIn {
-  from { 
-    opacity: 0; 
-    transform: translateY(20px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
