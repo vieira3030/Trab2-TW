@@ -1,7 +1,7 @@
 // server.js
 const express = require("express");
 const cors = require("cors");
-const axios = require("axios"); // Importa o axios para fazer pedidos externos
+const axios = require("axios"); // Fazer pedidos externos
 const db = require("./models");
 
 const app = express();
@@ -15,25 +15,27 @@ app.get("/", (req, res) => {
 });
 
 // --- PONTE PARA A API DE FUTEBOL ---
-// Apanha qualquer pedido feito para /api/football/ e envia para a API externa
-app.get("/api/football/*", async (req, res) => {
-  // Extrai o caminho original (ex: "teams?name=porto")
-  const endpoint = req.originalUrl.replace("/api/football/", "");
-  
+// Usa app.use para apanhar qualquer pedido e evitar o erro do asterisco no Render
+app.use("/api/football", async (req, res) => {
   try {
-    const response = await axios.get(`https://v3.football.api-sports.io/${endpoint}`, {
+    // req.url contém a parte final do caminho (ex: /teams?name=porto)
+    const response = await axios({
+      method: req.method,
+      url: `https://v3.football.api-sports.io${req.url}`,
       headers: {
         "x-rapidapi-host": "v3.football.api-sports.io",
-        "x-rapidapi-key": "8aef53ef6b47d8f9683111aba314b507" // ATENÇÃO: Substitui pela tua chave real!
+        "x-rapidapi-key": "8aef53ef6b47d8f9683111aba314b507" // Chave real da API
       }
     });
+    // Devolve os dados com sucesso ao frontend
     res.json(response.data);
   } catch (error) {
+    console.error("Erro na API de Futebol:", error.message);
     res.status(500).json({ error: "Erro de ligação à API de desporto" });
   }
 });
 
-// Define as restantes rotas da API
+// Define as rotas da base de dados e autenticação
 require("./routes/auth.routes")(app);
 require("./routes/favorite.routes")(app);
 require("./routes/comparison.routes")(app);
