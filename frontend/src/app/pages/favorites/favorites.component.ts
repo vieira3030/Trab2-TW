@@ -20,6 +20,7 @@ export class FavoritesComponent implements OnInit {
 
   private favoriteService = inject(FavoriteService);
   private toastService = inject(ToastService);
+favoritePlayers: any;
 
   // Executa automaticamente quando a página abre
   ngOnInit() {

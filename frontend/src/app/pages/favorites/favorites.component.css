@@ -1,55 +1,53 @@
-/* --- CONTENTOR PRINCIPAL --- */
 .favorites-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem 40px;
-  font-family: sans-serif;
-  min-height: 70vh;
+  min-height: calc(100vh - 80px);
+  /* Imagem de fundo com filtro escuro para dar destaque aos cartões */
+  background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), 
+              url('../../../assets/fundo-jogador.jpg');
+ background-size: 100% auto;
+  background-position: center top;
+  background-attachment: fixed;
+  padding: 40px 20px;
+  color: white;
+  font-family: 'Inter', sans-serif;
 }
 
-/* --- GRELHA DE FAVORITOS --- */
-.favorites-grid {
-  display: flex;
-  flex-wrap: wrap;
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+/* Organiza os cartões lado a lado */
+.players-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 30px;
-  justify-content: center;
-  width: 100%;
-  margin-top: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* Controla o tamanho do cartão nesta página */
-.favorite-item {
-  width: 220px; 
+.player-card-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  cursor: pointer; 
-  outline: none;
-  transition: box-shadow 0.2s ease-in-out;
+  gap: 10px;
 }
 
-/* Correção: Usar box-shadow em vez de transform para não estragar o modal fixed */
-.favorite-item:hover, .favorite-item:focus {
-  box-shadow: 0 8px 24px rgba(0, 255, 135, 0.2);
-  border-radius: 12px;
-}
-
-/* --- BOTÃO DE REMOVER --- */
+/* Design do botão de remover */
 .btn-remove {
-  width: 100%;
-  margin-top: -10px; 
-  padding: 12px;
-  background-color: #dc2626; 
+  background-color: #ef4444;
   color: white;
   border: none;
-  border-radius: 0 0 12px 12px; 
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
   cursor: pointer;
-  font-weight: bold;
-  z-index: 10;
-  transition: background-color 0.2s;
+  transition: background 0.3s;
 }
 
 .btn-remove:hover {
-  background-color: #b91c1c;
+  background-color: #dc2626;
 }

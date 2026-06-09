@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core'; // Adicionado o inject
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, NgForm } from '@angular/forms'; // Adicionado o NgForm
+import { FormsModule, NgForm } from '@angular/forms';
+import { Router } from '@angular/router'; // Importar o Router
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -8,25 +9,26 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css',
+  styleUrl: './register.component.css', // ou .scss
 })
 export class RegisterComponent {
-  // Injeção moderna sem usar o construtor
   private authService = inject(AuthService);
+  private router = inject(Router); // Injetar o Router
 
-  // 'NgForm' remove o erro de "Unexpected any"
+  // Processa o registo e redireciona para o login
   onSubmit(form: NgForm) {
     this.authService.register(form.value).subscribe({
       next: (res) => {
         alert('Sucesso: ' + res.message);
         form.reset();
+        this.router.navigate(['/login']); // Redirecionamento automático
       },
       error: (err) => {
-        console.error(err); // Isto vai mostrar o erro real na consola (F12)
+        console.error(err); 
         alert(
           'Erro: ' +
             (err.error?.message ||
-              'Não foi possível ligar ao servidor. O Rodrigo ligou o backend?'),
+              'Não foi possível ligar ao servidor. O Rodrigo ligou o backend?')
         );
       },
     });

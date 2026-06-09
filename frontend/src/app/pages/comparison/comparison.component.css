@@ -1,129 +1,81 @@
-/* Contentor principal do ecrã */
+/* Container Principal da Arena */
 .comparison-container {
+  min-height: calc(100vh - 80px);
+  background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.98)), 
+              url('../../../assets/goats.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem 20px;
-  font-family: sans-serif;
+  padding: 40px 20px;
+  color: white;
+  font-family: 'Inter', sans-serif;
 }
 
-/* Estrutura lado a lado */
 .arena {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 30px;
-  margin-top: 30px;
+  gap: 40px;
+  margin-top: 50px;
   width: 100%;
-  max-width: 900px;
+  max-width: 1100px;
 }
 
-/* Espaço de cada cartão */
+/* Slots estilo Vidro */
 .player-slot {
   flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-/* Secção central (VS e Botão) */
-.vs-section {
+  background: rgba(30, 41, 59, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 20px;
+  min-height: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  justify-content: center;
 }
 
-/* Círculo do "VS" */
+/* Badge VS */
 .vs-badge {
-  background-color: #1f2937;
-  color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
-  padding: 15px 20px;
+  background: #1e293b;
+  border: 2px solid #10b981;
+  color: #10b981;
+  font-size: 1.8rem;
+  font-weight: 900;
+  padding: 20px;
   border-radius: 50%;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
 }
 
-/* Botão de guardar comparação */
+/* Ajuste do botão Analisar Duelo */
 .btn-save-comparison {
-  background-color: #10b981;
+  background-color: #10b981; /* Verde elegante */
   color: white;
   border: none;
-  padding: 12px 20px;
-  font-size: 1rem;
-  border-radius: 6px;
+  padding: 15px 30px; /* Aumenta o tamanho do botão */
+  font-size: 1.1rem; /* Aumenta o texto */
+  border-radius: 50px; /* Formato arredondado */
   cursor: pointer;
-  font-weight: bold;
-  transition: background 0.2s;
+  font-weight: 700;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
 }
 
 .btn-save-comparison:hover {
   background-color: #059669;
+  transform: scale(1.05); /* Efeito de crescimento ao passar o rato */
 }
 
-/* Responsividade: passa os cartões para cima/baixo em ecrãs pequenos */
-@media (max-width: 768px) {
-  .arena {
-    flex-direction: column;
-  }
-}
-
-/* Barras de pesquisa e botões */
-.search-box {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-  width: 100%;
-  justify-content: center;
-}
-
-.search-box input {
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #444;
-  background: #2a2a2a;
-  color: white;
-  width: 200px;
-}
-
-.search-box button {
-  padding: 10px 15px;
-  background-color: #00ff87;
-  color: black;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.search-box button:hover {
-  background-color: #00cc6a;
-}
-
-/* Retângulo tracejado quando está vazio */
-.placeholder {
-  width: 250px;
-  height: 350px;
-  border: 2px dashed #6b7280;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #6b7280;
-  border-radius: 12px;
-  background: rgba(0, 0, 0, 0.1);
-}
-
-.player-slot {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* --- ESTILOS DO MODAL DE DUELO --- */
+/* MODAL DE DUELO */
 .modal-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.9);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -131,78 +83,98 @@
 }
 
 .modal-content {
-  background: #1e1e1e;
-  padding: 30px;
-  border-radius: 12px;
-  border: 2px solid #00ff87;
+  background: #1e293b;
+  padding: 40px;
+  border-radius: 20px;
+  border: 1px solid #10b981;
+  width: 90%;
+  max-width: 700px;
   text-align: center;
-  color: white;
-  min-width: 600px;
-}
-
-.modal-title {
-  margin-bottom: 30px;
-  color: #00ff87;
-}
-
-.stats-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.stat-column {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  width: 40%;
-}
-
-.modal-photo {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 3px solid white;
-  object-fit: cover;
 }
 
 .stat-column p {
-  margin: 0;
-  font-size: 1.1rem;
-}
-
-.vs-divider-modal {
-  font-size: 32px;
-  font-weight: bold;
-  color: #6b7280;
+  background: rgba(15, 23, 42, 0.5);
+  padding: 10px;
+  border-radius: 8px;
+  margin: 5px 0;
+  width: 100%;
 }
 
 .btn-winner {
-  background: #ffd700;
-  color: #000;
+  background: #10b981;
+  color: white;
   border: none;
   padding: 12px 20px;
-  border-radius: 6px;
+  border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
   margin-top: 15px;
-  transition: 0.2s;
-}
-
-.btn-winner:hover {
-  background: #ffea00;
-  transform: scale(1.05);
 }
 
 .btn-close {
-  background: #ff4c4c;
+  background: #ef4444;
   color: white;
   border: none;
-  padding: 10px 25px;
-  border-radius: 6px;
+  padding: 10px 30px;
+  border-radius: 8px;
   cursor: pointer;
-  margin-top: 30px;
+  margin-top: 20px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .arena { flex-direction: column; }
+}
+
+/* Centro: VS e Botão */
+.vs-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  z-index: 10;
+}
+
+.vs-circle {
+  width: 100px;
+  height: 100px;
+  background: #1e293b;
+  border: 2px solid #10b981; /* Ajustei a borda para ficar mais elegante */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center; /* Alinha horizontalmente */
+  align-items: center;     /* Alinha verticalmente */
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+}
+
+.vs-text {
+  font-size: 1.8rem;
+  font-weight: 900;
+  font-style: italic;
+  color: #10b981;
+  /* Garante que o texto não tenha margens estranhas */
+  margin: 0;
+  line-height: 1;
+}
+/* Garante que o VS e o botão ficam centralizados e organizados */
+.vs-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* O círculo VS que definiste */
+.vs-badge {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #10b981;
+  border-radius: 50%;
+  color: #10b981;
   font-weight: bold;
+  font-size: 1.5rem;
 }

@@ -1,34 +1,42 @@
-<div class="auth-container">
-  <h2>Criar Conta</h2>
-  <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+<div class="auth-page-wrapper">
+  <div class="auth-container">
+    <h2>Criar Conta</h2>
     
-    <div class="form-group">
-      <label for="username">Nome de Utilizador:</label>
-      <input id="username" type="text" name="username" ngModel required #name="ngModel" placeholder="Ex: andre123">
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
       
-      @if (name.invalid && name.touched) {
-        <small class="error">O nome é obrigatório.</small>
-      }
-    </div>
+      <div class="form-group">
+        <label for="username">Nome de Utilizador:</label>
+        <input id="username" type="text" name="username" ngModel required #name="ngModel" placeholder="Ex: andre123">
+        
+        @if (name.invalid && name.touched) {
+          <small class="error">O nome é obrigatório.</small>
+        }
+      </div>
 
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input id="email" type="email" name="email" ngModel required email #mail="ngModel" placeholder="email@exemplo.com">
-      
-      @if (mail.invalid && mail.touched) {
-        <small class="error">Insira um email válido.</small>
-      }
-    </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input id="email" type="email" name="email" ngModel required email #mail="ngModel" placeholder="email@exemplo.com">
+        
+        @if (mail.invalid && mail.touched) {
+          <small class="error">Insira um email válido.</small>
+        }
+      </div>
 
-    <div class="form-group">
-      <label for="password">Password:</label>
-      <input id="password" type="password" name="password" ngModel required minlength="6" #pass="ngModel" placeholder="Mínimo 6 caracteres">
-      
-      @if (pass.invalid && pass.touched) {
-        <small class="error">A password deve ter pelo menos 6 caracteres.</small>
-      }
-    </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input id="password" type="password" name="password" ngModel required minlength="6" #pass="ngModel" placeholder="Mínimo 6 caracteres">
+        
+        @if (pass.invalid && pass.touched) {
+          <small class="error">A password deve ter pelo menos 6 caracteres.</small>
+        }
+      </div>
 
-    <button [disabled]="registerForm.invalid" type="submit" class="btn-submit">Registar</button>
-  </form>
+      <button [disabled]="registerForm.invalid" type="submit" class="btn-submit">Registar</button>
+    </form>
+
+    <p style="margin-top: 20px; font-size: 0.9rem; text-align: center; color: #94a3b8;">
+      Já tens conta? <a href="/login" style="color: #10b981; text-decoration: none; font-weight: bold;">Entra aqui</a>
+    </p>
+
+  </div>
 </div>

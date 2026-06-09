@@ -1,0 +1,7 @@
+/* Embrulho que cobre a página toda e resolve o fundo branco */
+.auth-page-wrapper {
+  min-height: calc(100vh - 80px);
+  background-color: #0f172a;
+  display: flex;
+  align-items: flex-start;
+}

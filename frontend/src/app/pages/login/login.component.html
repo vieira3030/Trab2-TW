@@ -1,25 +1,34 @@
-<div class="auth-container">
-  <h2>Entrar</h2>
-  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+<div class="auth-page-wrapper">
+  <div class="auth-container">
+    <h2>Entrar</h2>
     
-    <div class="form-group">
-      <label for="login-email">Email:</label>
-      <input id="login-email" type="email" name="email" ngModel required email #mail="ngModel" placeholder="O teu email">
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
       
-      @if (mail.invalid && mail.touched) {
-        <small class="error">Insira um email válido.</small>
-      }
-    </div>
+      <div class="form-group">
+        <label for="login-email">Email:</label>
+        <input id="login-email" type="email" name="email" ngModel required email #mail="ngModel" placeholder="O teu email">
+        
+        @if (mail.invalid && mail.touched) {
+          <small class="error">Insira um email válido.</small>
+        }
+      </div>
 
-    <div class="form-group">
-      <label for="login-password">Password:</label>
-      <input id="login-password" type="password" name="password" ngModel required #pass="ngModel" placeholder="A tua password">
-      
-      @if (pass.invalid && pass.touched) {
-        <small class="error">A password é obrigatória.</small>
-      }
-    </div>
+      <div class="form-group">
+        <label for="login-password">Password:</label>
+        <input id="login-password" type="password" name="password" ngModel required #pass="ngModel" placeholder="A tua password">
+        
+        @if (pass.invalid && pass.touched) {
+          <small class="error">A password é obrigatória.</small>
+        }
+      </div>
 
-    <button [disabled]="loginForm.invalid" type="submit" class="btn-submit">Entrar</button>
-  </form>
+      <button [disabled]="loginForm.invalid" type="submit" class="btn-submit">Entrar</button>
+
+    </form>
+
+    <p style="margin-top: 20px; font-size: 0.9rem; text-align: center; color: #94a3b8;">
+      Não tens conta? <a href="/register" style="color: #10b981; text-decoration: none; font-weight: bold;">Cria uma aqui</a>
+    </p>
+
+  </div>
 </div>

@@ -16,13 +16,13 @@
         <input *ngIf="!isEditing" type="text" class="detail-input" [value]="role" readonly>
         
         <select *ngIf="isEditing" class="detail-input" [(ngModel)]="role">
-  <option value="Caça-Talentos (com miopia)">Caça-Talentos (com miopia)</option>
-  <option value="Treinador de Bancada (Mestre dos palpites)">Treinador de Bancada (Mestre dos palpites)</option>
-  <option value="Olheiro de Sofá (Scouting no YouTube)">Olheiro de Sofá (Scouting no YouTube)</option>
-  <option value="Tático do FM (Venceu a Champions virtual)">Tático do FM (Venceu a Champions virtual)</option>
-  <option value="Diretor Desportivo (Orçamento de 5€)">Diretor Desportivo (Orçamento de 5€)</option>
-  <option value="Presidente (Despede o treinador ao intervalo)">Presidente (Despede o treinador ao intervalo)</option>
-</select>
+          <option value="Caça-Talentos (com miopia)">Caça-Talentos (com miopia)</option>
+          <option value="Treinador de Bancada (Mestre dos palpites)">Treinador de Bancada (Mestre dos palpites)</option>
+          <option value="Olheiro de Sofá (Scouting no YouTube)">Olheiro de Sofá (Scouting no YouTube)</option>
+          <option value="Tático do FM (Venceu a Champions virtual)">Tático do FM (Venceu a Champions virtual)</option>
+          <option value="Diretor Desportivo (Orçamento de 5€)">Diretor Desportivo (Orçamento de 5€)</option>
+          <option value="Presidente (Despede o treinador ao intervalo)">Presidente (Despede o treinador ao intervalo)</option>
+        </select>
       </div>
     </div>
 
@@ -39,9 +39,16 @@
     
     <p *ngIf="!history || history.length === 0">Ainda não tens comparações guardadas.</p>
     
-    <ul *ngIf="history && history.length > 0" style="list-style: none; padding: 0; text-align: left; color: #cbd5e1;">
-      <li *ngFor="let item of history" style="padding: 10px; border-bottom: 1px solid #334155;">
-        {{ item.player1 }} vs {{ item.player2 }}
+    <ul *ngIf="history && history.length > 0" style="list-style: none; padding: 0; color: #cbd5e1; text-align: left;">
+      <li *ngFor="let item of history; let i = index" style="padding: 15px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <strong>{{ item.player1 }} vs {{ item.player2 }}</strong><br>
+          <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">🏆 Vencedor: {{ item.winner || 'Empate' }}</span>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button (click)="verNaArena()" style="background-color: #3b82f6; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold;">Ver</button>
+          <button (click)="eliminarDuelo(i)" style="background-color: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold;">X</button>
+        </div>
       </li>
     </ul>
   </div>
