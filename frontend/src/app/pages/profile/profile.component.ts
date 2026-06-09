@@ -53,13 +53,14 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  // 4. TERMINAR SESSÃO
+  // Termina a sessão e limpa a memória
   logout() {
     console.log('A terminar sessão e a limpar dados...');
-    // Se o teu authService tiver função de logout, chama-a aqui:
-    // this.authService.logout(); 
     
-    // Redireciona o utilizador de volta para a página inicial
-    this.router.navigate(['/']); 
+    // Apaga o token e os dados do utilizador do browser
+    localStorage.clear(); 
+    
+    // Redireciona para a página de login (ajusta '/login' se a tua rota for diferente)
+    this.router.navigate(['/login']); 
   }
 }

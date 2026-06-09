@@ -71,11 +71,21 @@ export class ComparisonComponent implements OnInit {
     }
   }
 
-  // Envia o vencedor para o serviço, mostra notificação e limpa a arena
+  // Envia o vencedor para o backend e atualiza a memória local
   chooseWinner(winner: PlayerData) {
     this.comparisonService.saveComparison(this.player1, this.player2, winner.name).subscribe({
       next: () => {
         this.toastService.show(`🏆 ${winner.name} venceu! Guardado no Perfil.`);
+        
+        // Vai buscar o histórico antigo ou cria uma lista vazia
+        const historico = JSON.parse(localStorage.getItem('olheiro_historico') || '[]');
+        
+        // Adiciona o novo duelo à lista
+        historico.push({ player1: this.player1?.name, player2: this.player2?.name });
+        
+        // Guarda a lista atualizada na memória
+        localStorage.setItem('olheiro_historico', JSON.stringify(historico));
+
         this.comparisonService.clearArena(); 
         this.player1 = null;
         this.player2 = null;

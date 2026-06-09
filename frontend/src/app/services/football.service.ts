@@ -12,9 +12,9 @@ export class FootballService {
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
 
-  // Procura o ID da equipa através do nome
+  // Alterado para 'search=' para permitir procurar equipas por partes do nome
   getTeamIdByName(teamName: string) {
-    return this.http.get<any>(`${this.baseUrl}/teams?name=${teamName}`);
+    return this.http.get<any>(`${this.baseUrl}/teams?search=${teamName}`);
   }
 
   // Obtém o plantel atual completo de uma equipa
@@ -22,9 +22,10 @@ export class FootballService {
     return this.http.get<any>(`${this.baseUrl}/players/squads?team=${teamId}`);
   }
 
-  // Vai buscar os detalhes e estatísticas de um jogador específico
+  // Pede os detalhes e força a época para obter estatísticas numéricas (Golos, Minutos, etc.)
   getPlayerDetails(id: number) {
     return this.http.get<any>(`${this.baseUrl}/players`, {
+      // Dica: Se os dados de 2023 continuarem a zero, altera para '2024' (época atual)
       params: { id: id.toString(), season: '2023' } 
     });
   }
