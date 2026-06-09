@@ -1,41 +1,96 @@
-/* Estilos básicos para os formulários */
+/* Importa a fonte para garantir que os formulários não herdam fontes antigas */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Cartão do formulário centrado e com fundo escuro */
 .auth-container {
   max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  margin: 80px auto; /* Dá um bom espaço do topo */
+  padding: 40px;
+  background-color: #1e293b; /* Fundo do cartão idêntico ao do Perfil */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  font-family: 'Inter', sans-serif;
+  color: white;
+  animation: fadeIn 0.5s ease;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  text-align: left;
 }
 
+/* Etiquetas dos campos (ex: "Email", "Password") */
 .form-group label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  color: #94a3b8;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
+/* Caixas de texto modernas */
 .form-group input {
   width: 100%;
-  padding: 8px;
+  padding: 12px 15px;
+  background-color: #0f172a;
+  border: 1px solid #334155;
+  color: white;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  outline: none;
   box-sizing: border-box;
+  transition: border-color 0.3s;
 }
 
+/* Borda fica verde quando clicas para escrever */
+.form-group input:focus {
+  border-color: #10b981;
+}
+
+/* Mensagens de erro com o vermelho de destaque */
 .error {
-  color: red;
-  font-size: 12px;
+  color: #ef4444; 
+  font-size: 0.85rem;
+  margin-top: 5px;
+  display: block;
 }
 
+/* Botão principal com o verde Olheiro Pro */
 .btn-submit {
   width: 100%;
-  padding: 10px;
-  background-color: #007bff;
+  padding: 14px;
+  margin-top: 10px;
+  background-color: #10b981;
   color: white;
   border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
+/* Efeito ao passar o rato (se não estiver desativado) */
+.btn-submit:hover:not(:disabled) {
+  background-color: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+}
+
+/* Aspeto do botão quando o formulário é inválido */
 .btn-submit:disabled {
-  background-color: #ccc;
+  background-color: #334155;
+  color: #94a3b8;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Animação suave de entrada */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
