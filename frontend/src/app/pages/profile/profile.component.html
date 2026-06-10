@@ -42,11 +42,11 @@
     <ul *ngIf="history && history.length > 0" style="list-style: none; padding: 0; color: #cbd5e1; text-align: left;">
       <li *ngFor="let item of history; let i = index" style="padding: 15px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center;">
         <div>
-          <strong>{{ item.player1 }} vs {{ item.player2 }}</strong><br>
+          <strong>{{ item.player1Name || item.player1 }} vs {{ item.player2Name || item.player2 }}</strong><br>
           <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">🏆 Vencedor: {{ item.winner || 'Empate' }}</span>
         </div>
         <div style="display: flex; gap: 8px;">
-          <button (click)="verNaArena()" style="background-color: #3b82f6; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold;">Ver</button>
+          <button (click)="verNaArena(item)" style="background-color: #3b82f6; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold;">Ver</button>
           <button (click)="eliminarDuelo(i)" style="background-color: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold;">X</button>
         </div>
       </li>

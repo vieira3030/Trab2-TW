@@ -1,9 +1,9 @@
 .favorites-container {
   min-height: calc(100vh - 80px);
-  /* Imagem de fundo com filtro escuro para dar destaque aos cartões */
-  background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), 
-              url('../../../assets/fundo-jogador.jpg');
- background-size: 100% auto;
+  background-color: #0f172a; /* Cor de segurança no fundo */
+  background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.98)), 
+                    url('../../../assets/fundo-jogador.jpg');
+  background-size: cover; 
   background-position: center top;
   background-attachment: fixed;
   padding: 40px 20px;
@@ -21,7 +21,7 @@
   font-weight: 800;
 }
 
-/* Organiza os cartões lado a lado */
+/* Organiza os cartões em grelha quadrada */
 .players-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -30,22 +30,36 @@
   margin: 0 auto;
 }
 
+/* Contentor do cartão (Sem blur nem transform para não prender o modal) */
 .player-card-wrapper {
+  background: #1e293b; /* Cor escura sólida estável */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  gap: 15px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Design do botão de remover */
+/* Efeito hover baseado em luz, sem movimentos que quebrem o fixed */
+.player-card-wrapper:hover {
+  border-color: #ef4444; 
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+}
+
+/* Botão de remover */
 .btn-remove {
   background-color: #ef4444;
   color: white;
   border: none;
-  padding: 10px;
+  padding: 12px;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s;
+  width: 100%; 
+  transition: background 0.3s ease;
 }
 
 .btn-remove:hover {

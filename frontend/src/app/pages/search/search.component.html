@@ -14,11 +14,13 @@
     
     <p class="info-text">Escreve o nome da equipa e carrega no botão para ver os jogadores.</p>
     
-    <p *ngIf="errorMessage" style="color: #ef4444; margin-top: 15px;">{{ errorMessage }}</p>
-    <p *ngIf="isLoading" style="color: #10b981; margin-top: 15px;">A pesquisar na base de dados...</p>
+    <p *ngIf="errorMessage" class="error-msg">{{ errorMessage }}</p>
+    <p *ngIf="isLoading" class="loading-msg">A pesquisar na base de dados...</p>
   </div>
 
-  <div class="results-container" *ngIf="!isLoading && players.length > 0">
-    <app-player-card *ngFor="let player of players" [player]="player"></app-player-card>
+  <div class="players-grid" *ngIf="!isLoading && players.length > 0">
+    <div class="player-card-box" *ngFor="let player of players">
+      <app-player-card [player]="player"></app-player-card>
+    </div>
   </div>
 </div>

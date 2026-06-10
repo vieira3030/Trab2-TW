@@ -10,15 +10,16 @@
       }
     </button>
 
+ @if (!isArenaView) {
     <button class="btn-arena" (click)="addToArena($event)">
-  ⚖️ Comparar
-</button>
-
+      ⚖️ Comparar
+    </button>
+ }
+ 
   </div>
   
   <div class="info">
     <h3>{{ player.name }}</h3>
-    
     @if (player.club) { <p><strong>Clube:</strong> {{ player.club }}</p> }
     @if (player.goals) { <p><strong>Golos:</strong> {{ player.goals }}</p> }
     @if (player.position) { <p><strong>Posição:</strong> {{ player.position }}</p> }
@@ -27,7 +28,7 @@
 </div>
 
 @if (showModal) {
- <div class="modal-overlay" (click)="closeModal($event)" tabindex="0" (keydown.enter)="closeModal($event)">
+  <div class="modal-overlay" (click)="closeModal($event)" tabindex="0" (keydown.enter)="closeModal($event)">
     
     <div class="modal-content" (click)="$event.stopPropagation()" tabindex="0" (keydown.enter)="$event.stopPropagation()">
       
@@ -40,16 +41,16 @@
 
       <div class="modal-body">
         <h3>Estatísticas Detalhadas</h3>
-       <div class="stats-grid">
+        <div class="stats-grid">
           <div class="stat-box"><strong>Idade:</strong> <br> {{ player.age || 'N/A' }}</div>
           <div class="stat-box"><strong>Peso:</strong> <br> {{ player.weight || 'N/A' }}</div>
           <div class="stat-box"><strong>Altura:</strong> <br> {{ player.height || 'N/A' }}</div>
-          <div class="stat-box"><strong>Nota (Rating):</strong> <br> ⭐ {{ player.rating || 'N/A' }}</div>
+          <div class="stat-box"><strong>Nota:</strong> <br> ⭐ {{ player.rating || 'N/A' }}</div>
           <div class="stat-box"><strong>Minutos:</strong> <br> ⏱️ {{ player.minutes || 0 }}</div>
           <div class="stat-box"><strong>Golos:</strong> <br> ⚽ {{ player.goals || 0 }}</div>
-          <div class="stat-box"><strong>Assistências:</strong> <br> 👟 {{ player.assists || 0 }}</div>
-          <div class="stat-box"><strong>Cartões:</strong> <br> 🟨 {{ player.yellowCards || 0 }}</div>
-          <div class="stat-box"><strong>Cartões:</strong> <br> 🟥 {{ player.redCards || 0 }}</div>
+          <div class="stat-box"><strong>Assists:</strong> <br> 👟 {{ player.assists || 0 }}</div>
+          <div class="stat-box"><strong>Amarelos:</strong> <br> 🟨 {{ player.yellowCards || 0 }}</div>
+          <div class="stat-box"><strong>Vermelhos:</strong> <br> 🟥 {{ player.redCards || 0 }}</div>
         </div>
       </div>
       

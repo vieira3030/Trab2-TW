@@ -1,90 +1,133 @@
+/* --- FUNDO E CONTENTOR PRINCIPAL --- */
 .search-container {
-  min-height: calc(100vh - 80px);
-  
-  /* Caminho da imagem corrigido para o deploy */
-  background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), 
-                    url('../../../assets/fundo-jogadores.jpg');
-  
-  background-size: 100% auto; 
-  background-position: top center; 
-  background-repeat: no-repeat; 
-  background-attachment: fixed;
-  
-  font-family: 'Inter', sans-serif;
-  color: white;
-  padding: 40px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 60px 20px 40px 20px;
+  min-height: calc(100vh - 80px);
+  font-family: 'Inter', sans-serif;
+  
+  /* Mantém o fundo escuro de segurança e a imagem do estádio/jogadores */
+  background-color: #0f172a;
+  background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.98)),
+                    url('../../../assets/fundo-jogador.jpg'); 
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
 }
 
+/* --- CAIXA DE PESQUISA (TOPO) --- */
 .search-card {
-  margin-top: 22vh; 
-  background-color: rgba(30, 41, 59, 0.65); 
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px); 
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  background: #1e293b;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  text-align: center;
   max-width: 600px;
   width: 100%;
-  text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
-.search-card h2 {
-  font-size: 1.8rem;
-  margin-bottom: 25px;
-  font-weight: 700;
+.search-card h2 { 
+  color: white; 
+  margin-bottom: 20px; 
 }
 
+/* Agrupa o input e o botão lado a lado */
 .search-group {
   display: flex;
   gap: 10px;
-  margin-bottom: 20px;
+  justify-content: center;
+  margin-bottom: 15px;
 }
 
+/* Campo de texto (Input) */
 .search-input {
   flex: 1;
-  padding: 14px 20px;
-  border-radius: 8px;
+  padding: 12px 15px;
   border: 1px solid #334155;
-  background-color: #0f172a;
-  color: white;
-  font-size: 1rem;
-  outline: none;
-  transition: border-color 0.3s;
-}
-
-.search-input:focus {
-  border-color: #10b981;
-}
-
-.btn-search {
-  background-color: #10b981;
-  color: white;
-  padding: 14px 24px;
-  border: none;
   border-radius: 8px;
-  font-weight: 600;
+  background: #0f172a;
+  color: white;
   font-size: 1rem;
+}
+
+/* Fica verde quando selecionado */
+.search-input:focus { 
+  outline: none; 
+  border-color: #10b981; 
+}
+
+/* Botão de pesquisar */
+.btn-search {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 0 20px;
+  border-radius: 8px;
+  font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s ease;
 }
 
-.btn-search:hover {
-  background-color: #059669;
+.btn-search:hover { 
+  background: #059669; 
 }
 
-.info-text {
-  color: #94a3b8;
-  font-size: 0.95rem;
-  margin: 0;
+/* Textos de informação e erro */
+.info-text { 
+  color: #94a3b8; 
+  font-size: 0.9rem; 
 }
 
-.results-container {
-  width: 100%;
+.error-msg { 
+  color: #ef4444; 
+  margin-top: 15px; 
+  font-weight: bold; 
+}
+
+.loading-msg { 
+  color: #10b981; 
+  margin-top: 15px; 
+  font-weight: bold; 
+}
+
+/* --- GRELHA DE JOGADORES --- */
+.players-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
   max-width: 1200px;
-  margin-top: 20px;
+  width: 100%;
+  margin: 0 auto; /* Centra a grelha */
+}
+
+/* --- CONTENTOR DO CARTÃO (MUITO IMPORTANTE) --- */
+/* Sem blur e sem transform para não prender o modal das estatísticas */
+.player-card-box {
+  background: #1e293b; /* Fundo escuro sólido */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efeito hover apenas com luz verde (sem movimento) */
+.player-card-box:hover {
+  border-color: #10b981; 
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+}
+
+/* --- RESPONSIVIDADE PARA TELEMÓVEIS --- */
+@media (max-width: 600px) {
+  .search-group { 
+    flex-direction: column; 
+  }
+  .btn-search { 
+    padding: 12px; 
+  }
 }

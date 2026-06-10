@@ -23,8 +23,11 @@ export class ComparisonComponent implements OnInit {
   private footballService = inject(FootballService);
 
   ngOnInit() {
-    this.player1 = this.comparisonService.player1Temp;
-    this.player2 = this.comparisonService.player2Temp;
+    // Subscreve as alterações da Arena em tempo real
+    this.comparisonService.currentPlayers$.subscribe(players => {
+      this.player1 = players[0] || null;
+      this.player2 = players[1] || null;
+    });
   }
 
   openDuelo() {
@@ -72,18 +75,22 @@ export class ComparisonComponent implements OnInit {
         
         const historico = JSON.parse(localStorage.getItem('olheiro_historico') || '[]');
         
-        // Adiciona a propriedade 'winner' ao objeto guardado
         historico.push({ 
-          player1: this.player1?.name, 
-          player2: this.player2?.name,
+          player1Id: this.player1?.id,
+          player1Name: this.player1?.name, 
+          player1Photo: this.player1?.photo,
+          
+          player2Id: this.player2?.id,
+          player2Name: this.player2?.name,
+          player2Photo: this.player2?.photo,
+          
           winner: winner.name 
         });
         
         localStorage.setItem('olheiro_historico', JSON.stringify(historico));
 
+        // Limpa a arena no serviço (que atualiza o ecrã automaticamente)
         this.comparisonService.clearArena(); 
-        this.player1 = null;
-        this.player2 = null;
         this.closeModal();
       },
       error: (err: any) => {

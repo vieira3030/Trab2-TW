@@ -1,6 +1,5 @@
-/* player-card.component.css */
+/* Cartão do jogador (Troca de transform por iluminação no hover) */
 .card {
-  /* Design principal do cartão expandido para preencher a coluna toda */
   background: white;
   border-radius: 12px;
   padding: 20px;
@@ -10,25 +9,26 @@
   flex-direction: column;
   box-sizing: border-box;
   text-align: center;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  border-top: 5px solid #4CAF50; /* Linha verde decorativa no topo */
-  transition: transform 0.2s;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); 
+  border-top: 5px solid #10b981; 
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
 }
 
+/* Realce com brilho verde no hover sem mover o elemento */
 .card:hover {
-  /* Efeito visual de elevação ao passar o rato */
-  transform: translateY(-5px);
+  border-color: #10b981;
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
 }
 
-/* Contentor da foto com tamanho fixo e centrado */
+/* Contentor da fotografia */
 .photo-container {
   position: relative; 
-  width: 140px; /* Tamanho reduzido para não desfocar */
-  margin: 0 auto 15px auto; /* O 'auto' centra a imagem no cartão */
+  width: 140px; 
+  margin: 0 auto 15px auto; 
 }
 
 .player-photo {
-  /* A foto ocupa os 140px do contentor */
   width: 100%;
   height: 140px;
   aspect-ratio: 1/1;
@@ -38,57 +38,11 @@
   display: block; 
 }
 
-/* --- BOTÃO DE FAVORITO (SISTEMA DE OLHEIRO) --- */
+/* Botão de estrela (Favorito) */
 .favorite-btn {
-  /* Fixa a estrela dentro do novo tamanho da foto */
   position: absolute;
-  top: 5px;
-  right: 5px;
-  background: rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  font-size: 16px;
-  cursor: pointer;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s, background 0.2s;
-  z-index: 10;
-}
-
-.favorite-btn:hover {
-  transform: scale(1.1);
-  background: rgba(0, 0, 0, 0.9);
-}
-
-.info h3 { 
-  /* Nome do jogador */
-  margin: 0 0 10px; 
-  color: #1a2a3a;
-  font-size: 1.4rem;
-}
-
-.info p { 
-  /* Linhas das estatísticas do jogador */
-  margin: 6px 0; 
-  color: #555; 
-  font-size: 1.1rem;
-}
-
-.info strong {
-  /* Destaca a negrito os rótulos das informações */
-  color: #333;
-}
-
-/* --- BOTÃO DE FAVORITO (SISTEMA DE OLHEIRO) --- */
-.favorite-btn {
-  /* Fixa a estrela por cima da fotografia no canto superior direito */
-  position: absolute;
-  top: 10px; /* Reduzido de 15px para 10px */
-  right: 10px; /* Reduzido de 15px para 10px */
+  top: 5px; 
+  right: 5px; 
   background: rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
@@ -100,78 +54,118 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s, background 0.2s;
+  transition: background 0.2s;
   z-index: 10;
 }
 
 .favorite-btn:hover {
-  /* Aumenta ligeiramente a estrela ao passar o rato */
-  transform: scale(1.1);
   background: rgba(0, 0, 0, 0.9);
 }
 
-/* ... MANTÉM O TEU CÓDIGO EXISTENTE AQUI ... */
-
-/* Adiciona o formato de ponteiro para indicar que o cartão é clicável */
-.card {
+/* Botão de comparar na Arena */
+.btn-arena {
+  position: absolute;
+  bottom: -15px; 
+  left: 50%;
+  transform: translateX(-50%);
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-size: 0.85rem;
+  font-weight: bold;
   cursor: pointer;
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+  z-index: 10;
+  white-space: nowrap;
+  transition: background 0.3s;
 }
 
-/* --- ESTILOS DO MODAL DE DETALHES --- */
+.btn-arena:hover {
+  background: #059669;
+}
 
-/* Fundo escuro que cobre o ecrã todo */
+/* Textos do cartão */
+.info h3 { 
+  margin: 15px 0 10px; 
+  color: #1a2a3a;
+  font-size: 1.3rem;
+}
+
+.info p { 
+  margin: 6px 0; 
+  color: #555; 
+  font-size: 1rem;
+}
+
+.info strong {
+  color: #333;
+}
+
+/* =========================================
+   MODAL DE ESTATÍSTICAS (CENTRADO ABSOLUTO)
+   ========================================= */
+
+/* Fundo escuro totalitário (Isolado de contextos de empilhamento) */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(15, 23, 42, 0.85); 
+  backdrop-filter: blur(8px); /* O efeito blur atua em segurança aqui */
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Garante que fica por cima de tudo */
+  z-index: 999999; /* Força o posicionamento acima de qualquer grelha */
 }
 
-/* Caixa principal do modal */
+/* Caixa com as estatísticas */
 .modal-content {
-  background: #1e1e1e;
+  background: #1e293b;
   color: white;
   padding: 30px;
-  border-radius: 12px;
+  border-radius: 16px;
   width: 90%;
   max-width: 500px;
+  max-height: 90vh; 
+  overflow-y: auto; 
   position: relative;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  cursor: default; /* Remove o cursor de "mãozinha" dentro do modal */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  cursor: default;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Botão para fechar no canto superior direito */
+/* Botão de fechar do modal */
 .close-btn {
   position: absolute;
   top: 15px;
   right: 15px;
-  background: #ff4a4a;
+  background: #ef4444;
   color: white;
   border: none;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   cursor: pointer;
   font-weight: bold;
+  font-size: 1.1rem;
+  transition: background 0.2s;
 }
 
 .close-btn:hover {
-  background: #e03b3b;
+  background: #dc2626;
 }
 
-/* Zona do título e foto miniatura */
+/* Topo do modal */
 .modal-header {
   display: flex;
   align-items: center;
   gap: 20px;
   margin-bottom: 20px;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 20px;
 }
 
@@ -180,32 +174,38 @@
   height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #00ff87;
+  border: 3px solid #10b981;
 }
 
 .modal-body h3 {
-  color: #00ff87;
-  margin-bottom: 15px;
+  color: #10b981;
+  margin-bottom: 20px;
 }
 
-/* Grelha para distribuir as estatísticas de forma simétrica */
+/* Grelha simétrica */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 15px;
 }
 
-/* Caixa individual de cada estatística */
 .stat-box {
-  background: #2a2a2a;
+  background: rgba(15, 23, 42, 0.6);
   padding: 15px 10px;
-  border-radius: 6px;
+  border-radius: 8px;
   text-align: center;
   font-size: 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .stat-box strong {
-  color: #888;
-  font-size: 0.9rem;
+  color: #94a3b8;
+  font-size: 0.85rem;
   text-transform: uppercase;
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

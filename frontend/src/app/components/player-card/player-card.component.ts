@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ToastService } from '../../services/toast.service'; 
 import { FootballService } from '../../services/football.service'; 
 import { FavoriteService, FavoritePlayer } from '../../services/favorite.service';
-import { ComparisonService } from '../../services/comparison.service'; // IMPORT NOVO
+import { ComparisonService } from '../../services/comparison.service'; 
 
 export interface PlayerData {
   id?: number;
@@ -37,13 +37,16 @@ export class PlayerCardComponent implements OnInit {
     photo: 'https://images.impresa.pt/sicnot/2026-05-22-cristiano-ronaldo-al-nassr--4-.jpg-f1e30469/original'
   };
 
+  // Diz ao cartão se ele está dentro da Arena de Comparação
+  @Input() isArenaView = false;
+
   isFavorite = false;
   showModal = false; 
   
   private toastService = inject(ToastService);
   private footballService = inject(FootballService); 
   private favoriteService = inject(FavoriteService);
-  private comparisonService = inject(ComparisonService); // INJEÇÃO NOVA
+  private comparisonService = inject(ComparisonService); 
 
   ngOnInit() {
     this.checkIfFavorite();
@@ -83,16 +86,17 @@ export class PlayerCardComponent implements OnInit {
     }
   }
 
-  // --- NOVA FUNÇÃO ---
-  // Adiciona o jogador à arena sem abrir o modal
+  // --- ENVIA PARA A ARENA ---
   addToArena(event: Event) {
     event.stopPropagation(); 
     this.comparisonService.addPlayerToArena(this.player);
     this.toastService.show(this.player.name + ' enviado para a Arena! ⚔️');
   }
 
-  // Abre os detalhes e pede os dados à API
   openModal() {
+    // Se o cartão estiver na Arena, bloqueia a abertura do painel individual
+    if (this.isArenaView) return;
+
     this.showModal = true;
     
     if (this.player.id && !this.player.weight) {
@@ -104,7 +108,7 @@ export class PlayerCardComponent implements OnInit {
           if (playerInfo && statsInfo) {
             this.player.weight = playerInfo.weight;
             this.player.height = playerInfo.height;
-            this.player.age = playerInfo.age; // <-- LINHA ADICIONADA: Carrega a idade da API
+            this.player.age = playerInfo.age; 
             this.player.goals = statsInfo.goals.total || 0;
             this.player.minutes = statsInfo.games.minutes || 0;
             this.player.assists = statsInfo.goals.assists || 0;

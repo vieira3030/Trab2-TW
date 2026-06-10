@@ -1,12 +1,19 @@
 <div class="favorites-container">
-  <div class="header">
-    <h1>A Minha Lista de Jogadores 🌟</h1>
+  <div class="header" style="margin-bottom: 40px;">
+    <h2>A Minha Lista de Jogadores 🌟</h2>
   </div>
 
-  <div class="players-grid">
-    <div class="player-card-wrapper" *ngFor="let player of favoritePlayers">
-       <app-player-card [player]="player"></app-player-card>
-       <button class="btn-remove" (click)="removeFavorite(player)">X Remover</button>
+  <div class="players-grid" *ngIf="favorites.length > 0">
+    <div class="player-card-wrapper" *ngFor="let player of favorites">
+      <app-player-card [player]="$any(player)"></app-player-card>
+      
+      <button class="btn-remove" (click)="removeFavorite(player.id)">
+        ❌ Remover
+      </button>
     </div>
   </div>
+
+  <p *ngIf="favorites.length === 0" style="color: #94a3b8; text-align: center;">
+    Ainda não adicionaste nenhum jogador aos favoritos.
+  </p>
 </div>

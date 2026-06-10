@@ -7,7 +7,7 @@
   <div class="arena">
     <div class="player-slot">
       @if (player1) {
-        <app-player-card [player]="player1"></app-player-card>
+        <app-player-card [player]="player1" [isArenaView]="true"></app-player-card>
       } @else {
         <div class="slot-overlay">
           <div class="pulse-icon">👤</div>
@@ -17,18 +17,17 @@
     </div>
 
     <div class="vs-center">
-  <div class="vs-circle">
-    <span class="vs-text">VS</span>
-  </div>
-  <button class="btn-save-comparison" (click)="openDuelo()">
-  📊 Analisar Duelo
-</button>
-</div>
-
+      <div class="vs-circle">
+        <span class="vs-text">VS</span>
+      </div>
+      <button class="btn-save-comparison" (click)="openDuelo()">
+        📊 Analisar Duelo
+      </button>
+    </div>
 
     <div class="player-slot">
       @if (player2) {
-        <app-player-card [player]="player2"></app-player-card>
+        <app-player-card [player]="player2" [isArenaView]="true"></app-player-card>
       } @else {
         <div class="slot-overlay">
           <div class="pulse-icon">👤</div>
@@ -41,38 +40,60 @@
 
 @if (showModal) {
   <div class="modal-overlay" (click)="closeModal()">
-    <div class="modal-content" (click)="$event.stopPropagation()">
-      <h2 class="modal-title">Estatísticas do Duelo ⚔️</h2>
+    <div class="modal-content duel-modal" (click)="$event.stopPropagation()">
+      
+      <button class="btn-close-modal" (click)="closeModal()">X</button>
+      <h2 class="duel-title">Análise do Duelo ⚖️</h2>
 
-      <div class="stats-container">
-        <div class="stat-column">
-          <img [src]="player1?.photo" alt="Foto J1" class="modal-photo">
+      <div class="duel-layout">
+        
+        <div class="duel-player">
+          <img [src]="player1?.photo" class="duel-photo">
           <h3>{{ player1?.name }}</h3>
-          <p>⚽ Golos: <strong>{{ player1?.goals ?? '...' }}</strong></p>
-          <p>👟 Assistências: <strong>{{ player1?.assists ?? '...' }}</strong></p>
-          <p>⏱️ Minutos: <strong>{{ player1?.minutes ?? '...' }}</strong></p>
-          <p>🟨 Amarelos: <strong>{{ player1?.yellowCards ?? '...' }}</strong></p>
-          <p>🟥 Vermelhos: <strong>{{ player1?.redCards ?? '...' }}</strong></p>
-          <p>⭐ Rating: <strong>{{ player1?.rating ?? '...' }}</strong></p>
-          <button class="btn-winner" (click)="chooseWinner(player1!)">🏆 Coroar Vencedor</button>
+          <button class="btn-winner" (click)="chooseWinner(player1!)">🏆 Coroar</button>
         </div>
 
-        <div class="vs-divider-modal">VS</div>
+        <div class="duel-stats-center">
+          <div class="stat-row">
+            <span class="stat-val">{{ player1?.goals || 0 }}</span>
+            <span class="stat-label">⚽ Golos</span>
+            <span class="stat-val">{{ player2?.goals || 0 }}</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-val">{{ player1?.assists || 0 }}</span>
+            <span class="stat-label">👟 Assists</span>
+            <span class="stat-val">{{ player2?.assists || 0 }}</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-val">{{ player1?.minutes || 0 }}</span>
+            <span class="stat-label">⏱️ Minutos</span>
+            <span class="stat-val">{{ player2?.minutes || 0 }}</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-val">{{ player1?.yellowCards || 0 }}</span>
+            <span class="stat-label">🟨 Amarelos</span>
+            <span class="stat-val">{{ player2?.yellowCards || 0 }}</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-val">{{ player1?.redCards || 0 }}</span>
+            <span class="stat-label">🟥 Vermelhos</span>
+            <span class="stat-val">{{ player2?.redCards || 0 }}</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-val">⭐ {{ player1?.rating || 'N/A' }}</span>
+            <span class="stat-label">Nota</span>
+            <span class="stat-val">⭐ {{ player2?.rating || 'N/A' }}</span>
+          </div>
+        </div>
 
-        <div class="stat-column">
-          <img [src]="player2?.photo" alt="Foto J2" class="modal-photo">
+        <div class="duel-player">
+          <img [src]="player2?.photo" class="duel-photo">
           <h3>{{ player2?.name }}</h3>
-          <p>⚽ Golos: <strong>{{ player2?.goals ?? '...' }}</strong></p>
-          <p>👟 Assistências: <strong>{{ player2?.assists ?? '...' }}</strong></p>
-          <p>⏱️ Minutos: <strong>{{ player2?.minutes ?? '...' }}</strong></p>
-          <p>🟨 Amarelos: <strong>{{ player2?.yellowCards ?? '...' }}</strong></p>
-          <p>🟥 Vermelhos: <strong>{{ player2?.redCards ?? '...' }}</strong></p>
-          <p>⭐ Rating: <strong>{{ player2?.rating ?? '...' }}</strong></p>
-          <button class="btn-winner" (click)="chooseWinner(player2!)">🏆 Coroar Vencedor</button>
+          <button class="btn-winner" (click)="chooseWinner(player2!)">🏆 Coroar</button>
         </div>
-      </div>
 
-      <button class="btn-close" (click)="closeModal()">Fechar Arena</button>
+      </div>
+      
     </div>
   </div>
 }
