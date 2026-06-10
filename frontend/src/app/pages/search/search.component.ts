@@ -38,8 +38,13 @@ export class SearchComponent {
     this.players = [];
     this.isLoading = true;
 
+    console.log(`A perguntar ao backend pela equipa: ${this.teamName}`);
+
     this.footballService.getTeamIdByName(this.teamName).subscribe({
       next: (data: any) => {
+        // 👇 ISTO VAI MOSTRAR A RESPOSTA REAL NA TUA CONSOLA 👇
+        console.log('Resposta do backend:', data); 
+
         if (data.response && data.response.length > 0) {
           const teamId = data.response[0].team.id;
           this.loadPlayers(teamId);
@@ -49,12 +54,13 @@ export class SearchComponent {
         }
       },
       error: (err: any) => {
+        console.error('Erro de ligação à API:', err);
         this.errorMessage = 'Erro de ligação à API. Tenta novamente mais tarde.';
         this.isLoading = false;
       }
     });
   }
-
+  
   // Carrega todos os jogadores do plantel da equipa
   private loadPlayers(id: number) {
     this.footballService.getPlayersByTeamId(id).subscribe({

@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  apiKey: '0c919ab090a1481297f282d3e4f2280d',
-  apiUrl: 'https://api.football-data.org/v4/'
+  apiKey: 'c9d0b15e703bbebada912b3c70110e15',
+  apiUrl: 'https://v3.football.api-sports.io' // URL da API de futebol
 };
