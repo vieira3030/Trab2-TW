@@ -10,7 +10,7 @@
   /* Mantém o fundo escuro de segurança e a imagem do estádio/jogadores */
   background-color: #0f172a;
   background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.98)),
-                    url('../../../assets/fundo-jogador.jpg'); 
+                    url('../../../assets/fundo-jogadores.jpg'); 
   background-size: cover;
   background-position: center top;
   background-attachment: fixed;
