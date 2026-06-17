@@ -69,33 +69,37 @@ export class ComparisonComponent implements OnInit {
 
   // Grava o vencedor e os dois jogadores no histórico
   chooseWinner(winner: PlayerData) {
+    // 1. Guarda IMEDIATAMENTE no localStorage (Para aparecer no Perfil sem falhas)
+    const historico = JSON.parse(localStorage.getItem('olheiro_historico') || '[]');
+    
+    historico.push({ 
+      player1Id: this.player1?.id,
+      player1Name: this.player1?.name, 
+      player1Photo: this.player1?.photo,
+      
+      player2Id: this.player2?.id,
+      player2Name: this.player2?.name,
+      player2Photo: this.player2?.photo,
+      
+      winner: winner.name 
+    });
+    
+    localStorage.setItem('olheiro_historico', JSON.stringify(historico));
+
+    // 2. Fecha a janela do duelo e limpa a arena logo a seguir
+    this.closeModal();
+    this.comparisonService.clearArena(); 
+    
+    // 3. Tenta enviar para o backend de forma silenciosa
     this.comparisonService.saveComparison(this.player1, this.player2, winner.name).subscribe({
       next: () => {
-        this.toastService.show(`🏆 ${winner.name} venceu! Guardado no Perfil.`);
-        
-        const historico = JSON.parse(localStorage.getItem('olheiro_historico') || '[]');
-        
-        historico.push({ 
-          player1Id: this.player1?.id,
-          player1Name: this.player1?.name, 
-          player1Photo: this.player1?.photo,
-          
-          player2Id: this.player2?.id,
-          player2Name: this.player2?.name,
-          player2Photo: this.player2?.photo,
-          
-          winner: winner.name 
-        });
-        
-        localStorage.setItem('olheiro_historico', JSON.stringify(historico));
-
-        // Limpa a arena no serviço (que atualiza o ecrã automaticamente)
-        this.comparisonService.clearArena(); 
-        this.closeModal();
+        // Se a base de dados aceitar, mostra mensagem de sucesso total
+        this.toastService.show(`🏆 ${winner.name} venceu! Guardado online e no Perfil.`);
       },
       error: (err: any) => {
-        console.error('Erro ao guardar:', err);
-        this.toastService.show('Erro ao guardar! Verifica a tua sessão.');
+        console.error('Erro ao guardar na Base de Dados (401):', err);
+        // Se o token falhar, a app não bloqueia e avisa o utilizador
+        this.toastService.show(`🏆 ${winner.name} venceu! (Guardado localmente. Inicia sessão para guardar online)`);
       }
     });
   }
