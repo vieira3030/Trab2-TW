@@ -2,6 +2,7 @@
   <div class="auth-container">
     <h2>Criar Conta</h2>
     
+    <!-- O ngSubmit impede o recarregamento padrão do formulário -->
     <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
       
       <div class="form-group">
@@ -35,7 +36,8 @@
     </form>
 
     <p style="margin-top: 20px; font-size: 0.9rem; text-align: center; color: #94a3b8;">
-      Já tens conta? <a href="/login" style="color: #10b981; text-decoration: none; font-weight: bold;">Entra aqui</a>
+      <!-- 3. Trocar href por routerLink para evitar recarregar a página -->
+      Já tens conta? <a routerLink="/login" style="color: #10b981; text-decoration: none; font-weight: bold;">Entra aqui</a>
     </p>
 
   </div>

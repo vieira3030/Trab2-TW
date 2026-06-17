@@ -86,18 +86,22 @@ export class ComparisonComponent implements OnInit {
     
     localStorage.setItem('olheiro_historico', JSON.stringify(historico));
 
-    // 2. Fecha a janela do duelo e limpa a arena logo a seguir
+    // 2. ⚠️ GUARDA OS DADOS NUMA VARIÁVEL SEGURA ANTES DE LIMPAR A ARENA
+    const p1Salvo = this.player1;
+    const p2Salvo = this.player2;
+
+    // 3. Fecha a janela do duelo e limpa a arena visualmente
     this.closeModal();
     this.comparisonService.clearArena(); 
     
-    // 3. Tenta enviar para o backend de forma silenciosa
-    this.comparisonService.saveComparison(this.player1, this.player2, winner.name).subscribe({
+    // 4. Tenta enviar para o bpregister.component.htmlackend usando as cópias seguras
+    this.comparisonService.saveComparison(p1Salvo, p2Salvo, winner.name).subscribe({
       next: () => {
         // Se a base de dados aceitar, mostra mensagem de sucesso total
         this.toastService.show(`🏆 ${winner.name} venceu! Guardado online e no Perfil.`);
       },
       error: (err: any) => {
-        console.error('Erro ao guardar na Base de Dados (401):', err);
+        console.error('Erro ao guardar na Base de Dados:', err);
         // Se o token falhar, a app não bloqueia e avisa o utilizador
         this.toastService.show(`🏆 ${winner.name} venceu! Comparação guardada no teu perfil.`);
       }
