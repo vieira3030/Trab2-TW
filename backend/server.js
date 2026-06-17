@@ -24,7 +24,7 @@ app.use("/api/football", async (req, res) => {
       url: `https://v3.football.api-sports.io${req.url}`,
       headers: {
         "x-rapidapi-host": "v3.football.api-sports.io",
-        "x-rapidapi-key": "c9d0b15e703bbebada912b3c70110e15" // Chave real da API
+        "x-rapidapi-key": "c5aab6e96999f7aa1114a605e54d6cb1" // Chave real da API
       }
     });
     // Devolve os dados com sucesso ao frontend
