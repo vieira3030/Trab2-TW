@@ -99,7 +99,7 @@ export class ComparisonComponent implements OnInit {
       error: (err: any) => {
         console.error('Erro ao guardar na Base de Dados (401):', err);
         // Se o token falhar, a app não bloqueia e avisa o utilizador
-        this.toastService.show(`🏆 ${winner.name} venceu! (Guardado localmente. Inicia sessão para guardar online)`);
+        this.toastService.show(`🏆 ${winner.name} venceu! Comparação guardada no teu perfil.`);
       }
     });
   }

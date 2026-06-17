@@ -1,14 +1,17 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { provideHttpClient, withInterceptors } from '@angular/common/http'; // 1. Adiciona o withInterceptors
+import { provideRouter, withHashLocation } from '@angular/router'; // Adicionado withHashLocation
+import { provideHttpClient, withInterceptors } from '@angular/common/http'; 
 import { routes } from './app.routes';
-import { authInterceptor } from './interceptors/auth.interceptor'; // 2. Importa o teu novo ficheiro de segurança
+import { authInterceptor } from './interceptors/auth.interceptor'; 
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }), 
-    provideRouter(routes),
-    // 3. Liga o interceptor aqui dentro
+    
+    // Ativa o routing com cardinal (#) para evitar o erro 404 no GitHub Pages
+    provideRouter(routes, withHashLocation()), 
+    
+    // Liga o interceptor de segurança
     provideHttpClient(withInterceptors([authInterceptor])) 
   ]
 };
