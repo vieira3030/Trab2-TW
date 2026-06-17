@@ -1,10 +1,12 @@
 <nav class="navbar">
   
-  <<div class="logo" routerLink="/">
-  ⚽ Olheiro <span>Pro</span>
-</div>
+  <!-- Corrigido: Removido o "<" a mais no início da tag div -->
+  <div class="logo" routerLink="/">
+    ⚽ Olheiro <span>Pro</span>
+  </div>
 
   <ul class="nav-links">
+    <!-- Links a usar o routerLink corretamente -->
     <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Início</a></li>
     <li><a routerLink="/search" routerLinkActive="active">Pesquisar Clubes</a></li>
     <li><a routerLink="/favorites" routerLinkActive="active">Meus Favoritos</a></li>
